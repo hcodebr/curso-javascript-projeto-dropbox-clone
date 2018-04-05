@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Hcode Treinamentos">
+
+    <title>DropBox Clone</title>
+
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/dropbox-clone.css" rel="stylesheet">
+    <style>
+        .fixed-layer-container{position:fixed;z-index:6;top:0;left:0;width:0;height:100vh;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}#maestro-nav{-webkit-box-flex:1;-ms-flex:1 1 100%;flex:1 1 100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.maestro_nav__toggle,.maestro_nav__curtain{display:none}.user-education{width:100vw;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}.maestro-chrome{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:784px}.maestro strong,.maestro b{font-weight:500;font-family:AtlasGrotesk,sans-serif}.maestro #page-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.maestro .page-header{position:fixed;z-index:5;-webkit-box-sizing:content-box;box-sizing:content-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;white-space:nowrap;left:240px;width:calc(100% - (200px + 2 * 40px));min-width:744px;background:#fff;padding:40px 0 0 40px;height:56px}.maestro .page-header__shadow{-webkit-box-flex:0;-ms-flex:0 0 96px;flex:0 0 96px}.maestro .page-header__heading{font-size:20px;line-height:32px;padding:0;margin:0;color:#1B2733}.maestro .page-header__title{outline:none;position:absolute;z-index:8}.maestro #page-footer{position:fixed;z-index:4;left:calc(100% - 240px);padding:3px 0 8px 15px;margin-left:0;bottom:0;background-color:#fff}.maestro .top-menu-container{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.maestro .maestro-app{display:-webkit-box;display:-ms-flexbox;display:flex}.maestro .maestro-app-content{position:relative;z-index:1;-webkit-box-flex:1;-ms-flex:1;flex:1;min-width:420px;margin-left:40px;outline:none}.maestro .maestro-app-content:only-child{margin-right:40px}.maestro .maestro-secondary-sidebar{position:fixed;z-index:2;height:100%;width:200px;padding:0 40px 0 40px;background:transparent}.maestro .maestro-secondary-sidebar__shadow{outline:none;-webkit-box-flex:0;-ms-flex:0 0 240px;flex:0 0 240px;margin-right:40px}.maestro #maestro-prompt{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.maestro .top-notification-bar-silo{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1;-webkit-box-flex:0;-ms-flex:0 0 48px;flex:0 0 48px}.maestro .top-notification-bar-silo::before{position:fixed;z-index:2;content:"";width:100%;height:48px;background:#fff;left:0}.maestro #top-notification-bar-container{position:fixed;z-index:9;-webkit-box-sizing:border-box;box-sizing:border-box;height:40px;margin-top:8px;top:auto}.maestro #prompt-silo .ha,.maestro #ha-container .ha,.maestro #full_admin_page .ha{position:fixed;z-index:3;bottom:60px;right:40px}.maestro .account-header-silo,.maestro .account-header-react-silo{margin:0}.maestro .maestro-tab-nav{-ms-flex-preferred-size:100%;flex-basis:100%}.maestro .maestro-tab-nav .c-tabs__bar{position:fixed;z-index:5;background:#fff;-webkit-box-sizing:border-box;box-sizing:border-box;width:calc(100% - 560px);min-width:464px;height:auto;margin-top:0;line-height:39px}.maestro .maestro-tab-nav .c-tabs__bar-shadow{height:40px}.maestro .maestro-tab-nav .c-tabs__bar-shadow::before{position:fixed;z-index:5;content:"";background:#fff;width:calc(100% - 560px);height:40px}.maestro .maestro-tab-nav .c-tabs__tab{letter-spacing:.03em}.maestro .maestro-tab-nav .c-tabs__tab--selected{letter-spacing:0}.maestro .maestro-tab-nav .c-tabs__tab+.c-tabs__tab{margin-left:24px}.maestro .maestro-tab-nav .c-tabs__tab .c-tabs__label{padding-bottom:0}.maestro.no-scroll{position:static;overflow-y:hidden}@media screen and (max-width: 1024px){.maestro.maestro--responsive .has-top-notification .page-header{padding-top:40px}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .has-top-notification .top-level-nav-item{top:71px}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .page-header{min-width:0;left:auto;right:0;width:100%;padding-top:10px;padding-left:254px;height:96px;-webkit-box-sizing:border-box;box-sizing:border-box}}@media screen and (max-width: 735px){.maestro.maestro--responsive .page-header{height:76px;padding-left:12px}}@media screen and (max-width: 735px){.maestro.maestro--responsive .page-header__shadow{-webkit-box-flex:0;-ms-flex:0 0 76px;flex:0 0 76px}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .page-header__title{top:46px;overflow:hidden}}@media screen and (max-width: 735px){.maestro.maestro--responsive .page-header__title{width:calc(100% - 20px)}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .pagelet-top-menu__container{padding-right:20px;top:10px;right:0;min-width:0}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .maestro-header .top-menu-container{margin-right:0;width:auto;height:32px;min-width:0;left:inherit;margin-left:36px}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .maestro-header .top-menu-container--search-bar-empty-space{width:116px}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .top-level-nav-item{left:250px;right:auto}.maestro.maestro--responsive .top-level-nav-item .header-bubble{left:-1px;right:auto}.maestro.maestro--responsive .top-level-nav-item .header-bubble .chat-bubble-arrow{left:30px;right:auto}.maestro.maestro--responsive .top-level-nav-item .header-bubble .chat-bubble-arrow-border{left:30px;right:auto}}@media screen and (max-width: 735px){.maestro.maestro--responsive .top-level-nav-item{display:none}}@media screen and (max-width: 1024px){.maestro.maestro--responsive #page-content{margin-bottom:5em;min-height:calc(100vh - 5em);padding-bottom:0}}@media screen and (max-width: 1024px){.maestro.maestro--responsive #ha-silo,.maestro.maestro--responsive #main-silo{display:none}}@media screen and (max-width: 1024px){.maestro.maestro--responsive #page-footer{right:35px;left:auto;bottom:1px}}@media screen and (max-width: 1024px){.maestro.maestro--responsive #top-notification-bar-container{left:250px;right:10px}}@media screen and (max-width: 735px){.maestro.maestro--responsive #top-notification-bar-container{left:52px;right:10px}}@media screen and (max-width: 735px){.maestro.maestro--responsive .embedded-app{padding-left:0}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .maestro-chrome{min-width:0}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .maestro-app-content{position:relative;min-width:0;margin-left:0;margin-right:0}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .maestro-secondary-sidebar__shadow{margin-right:0;padding:0;-webkit-box-flex:initial;-ms-flex:initial;flex:initial;margin-right:0}}@media screen and (max-width: 1024px){.maestro.maestro--responsive .maestro-secondary-sidebar{margin-right:0;position:fixed;height:auto;width:auto;right:15px;padding:3px 0 0;background-color:white}}
+        #logo-dropbox {
+            padding: 40px 0 0 40px;
+        }
+        #logo-dropbox .maestro-nav__home-button {
+            border: none;
+            background: transparent;
+            color: #0070E0;
+            display: inline-block;
+            position: relative;
+            margin-left: -8px;
+            margin-bottom: 24px;
+            padding: 0 0 0 8px;
+            cursor: pointer;
+        }
+        #logo-dropbox .maestro-nav__caret {
+            position: absolute;
+            left: -12px;
+            top: 5px;
+            width: 24px;
+            height: 24px;
+            fill: #99C6F3;
+        }
+
+        .maestro body, .maestro input, .maestro textarea, .maestro select, .maestro button, .maestro .normal {
+            font-family: AtlasGrotesk,sans-serif;
+        }
+        .maestro-nav__contents {
+            overflow-y: auto;
+            position: absolute;
+            width: 200px;
+            padding-left: 40px;
+        }
+        .maestro-nav__features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .maestro-nav__features-header-link {
+            color: #0070E0;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: normal;
+            display: block;
+        }
+        #maestro-nav h2 {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .maestro-nav__features-header {
+            margin-top: 0;
+            margin-bottom: 24px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 40px;
+        }
+        a.maestro-nav__feature {
+            color: #637282;
+            font-size: 14px;
+            text-decoration: none;
+            line-height: 14px;
+            display: block;
+        }
+        .maestro-nav__feature-wrap {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 32px;
+        }
+        .maestro-nav-footer {
+    color: #1B2733;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.ue-effect-container {
+    position: relative;
+}
+.maestro-nav-switcher {
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 80px;
+}
+.maestro-nav-footer button, .maestro-nav-footer [role="button"] {
+    cursor: pointer;
+}
+.maestro-nav-switcher-button {
+    display: block;
+    padding: 0;
+    height: 100%;
+    background: #F7F9FA;
+    position: relative;
+    width: 100%;
+}
+.maestro-nav-switcher-button__content {
+    margin: 0 20px;
+    height: 100%;
+    border-top: 1px solid #E6E8EB;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.maestro-nav-switcher-button__info {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: left;
+    white-space: nowrap;
+}
+.maestro-nav-switcher-button__icon {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 24px;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    right: 10px;
+    position: absolute;
+    opacity: 0.3;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+
+                <div id="logo-dropbox">
+                    <a class="maestro-nav__home-button" href="#" data-reactid="11">
+                        <svg class="maestro-nav__logo" aria-label="Início" xmlns="http://www.w3.org/2000/svg" role="img" width="32px" height="32px"
+                            viewBox="0 0 32 32" style="fill:#0062ff;" data-reactid="12">
+                            <title data-reactid="13"></title>
+                            <path d="M8 2.4l8 5.1-8 5.1-8-5.1 8-5.1zm16 0l8 5.1-8 5.1-8-5.1 8-5.1zM0 17.7l8-5.1 8 5.1-8 5.1-8-5.1zm24-5.1l8 5.1-8 5.1-8-5.1 8-5.1zM8 24.5l8-5.1 8 5.1-8 5.1-8-5.1z"
+                                data-reactid="14"></path>
+                        </svg>
+                        <svg class="maestro-nav__caret" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" data-reactid="15">
+                            <title data-reactid="16">Left Arrow</title>
+                            <g id="arrow" transform="translate(-32.000000, -32.000000)" data-reactid="17">
+                                <g id="arrow-left" transform="translate(32.000000, 32.000000)" data-reactid="18">
+                                    <polygon id="Combined-Shape" points="12.9497475 7.05000305 8 11.9997505 12.9497475 16.949498 14.363961 15.5352844 10.8284271 11.9997505 14.363961 8.46421661"
+                                        data-reactid="19"></polygon>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="sidebar-sticky">
+                    <div class="maestro-nav__contents">
+                        <ul class="maestro-nav__features" data-reactid="21">
+                            <li data-reactid="22">
+                                <h2 class="maestro-nav__features-header" data-reactid="23">
+                                    <a href="#" class="maestro-nav__features-header-link" data-reactid="24">Arquivos</a>
+                                </h2>
+                            </li>
+                            <li data-reactid="25">
+                                <div class="maestro-nav__feature-wrap" data-reactid="26">
+                                    <span class="ue-effect-container uee-FeatureNav-myFiles" data-reactid="27">
+                                        <a href="#" class="maestro-nav__feature maestro-nav__active-feature" data-reactid="28">
+                                        Meus arquivos
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li data-reactid="30">
+                                <div class="maestro-nav__feature-wrap" data-reactid="31">
+                                    <span class="ue-effect-container uee-FeatureNav-sharing" data-reactid="32">
+                                        <a href="#" class="maestro-nav__feature" data-reactid="33">
+                                            Compartilhamento
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li data-reactid="35">
+                                <div class="maestro-nav__feature-wrap" data-reactid="36">
+                                    <span class="ue-effect-container uee-FeatureNav-fileRequests" data-reactid="37">
+                                        <a href="#" class="maestro-nav__feature" data-reactid="38">
+                                            Solicitações de arquivo
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li data-reactid="40">
+                                <div class="maestro-nav__feature-wrap" data-reactid="41">
+                                    <span class="ue-effect-container uee-FeatureNav-deletedFiles" data-reactid="42">
+                                        <a href="#" class="maestro-nav__feature" data-reactid="43">
+                                            Arquivos excluídos
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="maestro-nav-footer" data-reactid="45">
+                    <div class="ue-effect-container uee-FooterNav-NavSwitcher" data-reactid="46">
+                        <div class="maestro-nav-switcher" data-reactid="47">
+                            <span role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" class="maestro-nav-switcher-button" data-reactid="48">
+                                <div class="maestro-nav-switcher-button__content" data-reactid="49">
+                                    <div class="maestro-nav-switcher-button__info" data-reactid="50">
+                                        <div class="maestro-nav-switcher-button__title" data-reactid="51">HCODE</div>
+                                        <div class="maestro-nav-switcher-button__label" data-reactid="52">3 membros</div>
+                                    </div>
+                                    <svg class="maestro-nav-switcher-button__icon" viewBox="0 0 24 24" data-reactid="53">
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" data-reactid="54">
+                                            <g id="form" transform="translate(-160.000000, -32.000000)" fill="#000000" data-reactid="55">
+                                                <g id="form-switcher" transform="translate(160.000000, 32.000000)" data-reactid="56">
+                                                    <path d="M10.5,9 L8.26000214,9 L12.0100021,4 L15.7600021,9 L13.5,9 L12,7 L10.5,9 Z" id="Combined-Shape"
+                                                        data-reactid="57"></path>
+                                                    <path d="M10.5,20 L8.26000214,20 L12.0100021,15 L15.7600021,20 L13.5,20 L12,18 L10.5,20 Z"
+                                                        id="Combined-Shape" transform="translate(12.010002, 17.500000) scale(1, -1) translate(-12.010002, -17.500000) "
+                                                        data-reactid="58"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                
+                <header class="maestro-header page-header__shadow">
+                    <div class="page-header">
+                        <div class="page-header__title page-header__title-overflow" tabindex="0">
+                            <span class="ue-effect-container uee-PageletMaestroHeader-Title">
+                                <h1 class="page-header-text u-l-fl">
+                                    <span class="ue-effect-container uee-BrowseLocation-HomeTitle">HCODE</span>
+                                </h1>
+                            </span>
+                        </div>
+                        <div class="top-menu-container ">
+                            <div class="search-bar--container u-l-fr">
+                                <div class="is-collapsed search-bar">
+                                    <form class="search-bar__input">
+                                        <button aria-label="Buscar" class="search-bar__button" type="submit">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-selectable">
+                                                <title>Artboard</title>
+                                                <defs>
+                                                    <circle id="mc-global-search-small-a" cx="5" cy="5" r="5"></circle>
+                                                </defs>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <path d="M15 15l3 3" stroke="#637282" stroke-width="2" stroke-linecap="round"></path>
+                                                    <g transform="translate(7 7)">
+                                                        <mask id="mc-global-search-small-b" fill="#fff">
+                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mc-global-search-small-a"></use>
+                                                        </mask>
+                                                        <circle stroke="#637282" stroke-width="4" mask="url(#mc-global-search-small-b)" cx="5"
+                                                            cy="5" r="5"></circle>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <input aria-activedescendant="search-dropdown-suggestion0" aria-autocomplete="list" aria-expanded="false"
+                                            aria-label="Buscar" aria-owns="search-bar__suggestions" class="search-bar__text-input" placeholder="Buscar"
+                                            role="combobox" value="" tabindex="1">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="top-menu-container--search-bar-empty-space"></div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        a
+                    </div>
+                    <div class="col-md-3" style="background-color:#CCC">
+                        a
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>
