@@ -3190,6 +3190,7 @@ clipping with .c-snackbar border. */
 }
 .list-unstyled li {
     display: inline-block;
+    margin: 2px;
 }
 #btn-send-file {
     margin-top: 40px;
@@ -3203,6 +3204,5 @@ clipping with .c-snackbar border. */
 }
 .list-unstyled li.selected {
     background-color: #D6E8FA;
-    border: 1px solid #D6E8FA;
-    border-radius: 10px;
+    border-radius: 2px;
 }
