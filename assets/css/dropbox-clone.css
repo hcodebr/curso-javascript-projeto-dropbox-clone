@@ -3201,3 +3201,8 @@ clipping with .c-snackbar border. */
 .btn-link.btn-icon i {
     margin-right: 10px;
 }
+.list-unstyled li.selected {
+    background-color: #D6E8FA;
+    border: 1px solid #D6E8FA;
+    border-radius: 10px;
+}
