@@ -13,7 +13,12 @@ class DropBoxController {
         });
         this.inputFilesEl.addEventListener('change', e=>{
             console.log(e.target.files);
+            this.uploadTask(e.target.files)
             this.snackModalEl.style.display = "block"
         })
+    }
+    uploadTask(files){
+        let promises = [];
+
     }
 }   
