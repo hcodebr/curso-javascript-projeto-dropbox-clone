@@ -19,7 +19,11 @@ class DropBoxController {
     }
     uploadTask(files){
         let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
-        
-        return Promise.all(promises)
+        [...files].forEach(file=>{
+            promises.push(new Promise((resolve, reject)=>[
+
+            ]));
+        }) //convertemos em array e usamos o spread 
+        return Promise.all(promises) //redebe todas as promises
     }
 }   
