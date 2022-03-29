@@ -13,12 +13,13 @@ class DropBoxController {
         });
         this.inputFilesEl.addEventListener('change', e=>{
             console.log(e.target.files);
-            this.uploadTask(e.target.files)
+            this.uploadTask(e.target.files) //vai fazer upload de varios arquivos
             this.snackModalEl.style.display = "block"
         })
     }
     uploadTask(files){
-        let promises = [];
-
+        let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
+        
+        return Promise.all(promises)
     }
 }   
