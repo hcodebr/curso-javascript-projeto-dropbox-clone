@@ -4,7 +4,7 @@ class DropBoxController {
         this.inputFilesEl = document.querySelector('#files') //seletor de arquivos
         this.btnSendFileEl = document.querySelector('#btn-send-file') //botao de enviar arquivos
         this.snackModalEl = document.querySelector('#react-snackbar-root') //barra de progresso
-        this.progressBarEl = document.querySelector('.mc-progress-bar-bg'); //elemento da barra 
+        this.progressBarEl = document.querySelector('.mc-progress-bar-fg'); //elemento da barra 
         this.InitEvents();
     }
     InitEvents(){
