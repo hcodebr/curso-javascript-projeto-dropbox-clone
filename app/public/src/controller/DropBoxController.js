@@ -34,6 +34,10 @@ class DropBoxController {
                     reject(event) //Retorna o erro
                 }
 
+                ajax.upload.onprogress = event =>{
+                    console.log(event);
+                    this.uploadProgress(event, files);
+                };
                 let formData = new FormData(); //criamos um form data
                 formData.append('input-file', files )   //recebe os files(array recebendo as promises)
                 ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
@@ -41,5 +45,11 @@ class DropBoxController {
             }));
         }); //convertemos em array e usamos o spread 
         return Promise.all(promises) //redebe todas as promises e faz o controle doque deu resolve ou reject
+    }
+    uploadProgress(event, files){
+        let loaded = event.loaded;
+        let total = event.total;
+
+        let porcentage = parseInt((loaded/total) * 100)
     }
 }   
