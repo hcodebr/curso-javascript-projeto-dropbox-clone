@@ -43,6 +43,9 @@ class DropBoxController {
                 };
                 let formData = new FormData(); //criamos um form data
                 formData.append('input-file', files )   //recebe os files(array recebendo as promises)
+                
+                this.startUpload = Date.now();
+
                 ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
 
             }));
@@ -50,6 +53,7 @@ class DropBoxController {
         return Promise.all(promises) //redebe todas as promises e faz o controle doque deu resolve ou reject
     }
     uploadProgress(event, files){
+        let timeSpent = Date.now() - this.startUpload //pega o tempo gasto 
         let loaded = event.loaded;
         let total = event.total;
 
