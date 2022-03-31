@@ -4,6 +4,7 @@ class DropBoxController {
         this.inputFilesEl = document.querySelector('#files') //seletor de arquivos
         this.btnSendFileEl = document.querySelector('#btn-send-file') //botao de enviar arquivos
         this.snackModalEl = document.querySelector('#react-snackbar-root') //barra de progresso
+        this.progressBarEl = document.querySelector('.mc-progress-bar-bg'); //elemento da barra 
         this.InitEvents();
     }
     InitEvents(){
@@ -50,6 +51,7 @@ class DropBoxController {
         let loaded = event.loaded;
         let total = event.total;
 
-        let porcentage = parseInt((loaded/total) * 100)
+        let porcentage = parseInt((loaded/total) * 100) //pega a quantidade total de bytes, divide pela quantidade ja no upload e faz tudo x100
+        this.progressBarEl.style.width = `${porcentage}px`     //Pega a barra e troca dependendo da porcentagem            /*porcentage+'px';*/
     }
 }   
