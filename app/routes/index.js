@@ -17,7 +17,9 @@ router.post('/upload', (req, res)=>{ //criando a rota upload
       //recebendo o req(JSON), e na arrow function ele recebe o erro(caso haja), 
       //o fields e o files separa os dados enviados via post para verificar oque é arquivo e oque nao é
       //colocando em 2 JSONS diferentes
-      
+      res.json({
+        files
+      })
     })
 
     res.json(req.body) //ela recebe o JSON
