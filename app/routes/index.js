@@ -7,10 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/upload', (req, res)=>{ //criando a rota upload
+router.post('/upload', (req, res) =>{ //criando a rota upload
   let form = new formidable.IncomingForm({ //envia o formulario com o diretorio da pasta upload que esta na raiz
-    keepExtensions: true, //mantem as extensões do arquivo
-    uploadDir: './upload' //envia o diretório 
+    uploadDir: './upload', //envia o diretório 
+    keepExtensions: true //mantem as extensões do arquivo
   })
 
     form.parse(req, (err, fields, files)=>{ //pega o arquivo e da um parse para interpretar
@@ -22,7 +22,8 @@ router.post('/upload', (req, res)=>{ //criando a rota upload
       })
     })
 
-    res.json(req.body) //ela recebe o JSON
+   
 
 })
 module.exports = router;
+
