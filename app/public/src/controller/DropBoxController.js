@@ -65,13 +65,26 @@ class DropBoxController {
 
         console.log(timespent, timeLeft, porcentage)
     }
+    formatTimeToHuman(duration)
+    {
+    let seconds = parseInt((duration / 1000 ) /*converte pra segundos*/ % 60) //pega o resto da divisao no caso os minutos
+    let minutes = parseInt((duration / (1000*60)) %60)
+    let hours = parseInt((duration / (1000*60 * 60)) %24)
+    
+    if(hours>0){
+        return `${hours} horas  ${minutes} minutos e ${seconds} segundos`
+    }
 
+    if(minutes>0){
+        return `${minutes} minutos e ${seconds} segundos`
+    }
+
+    if(seconds>0){
+        return `${seconds} segundos`
+    }
+    
+    return '';
+    };
 
 }   
 
-formatTimeToHuman()
-{
-let seconds = parseInt((duration / 1000 ) /*converte pra segundos*/ % 60) //pega o resto da divisao no caso os minutos
-let minutes = parseInt((duration / (1000*60)) %60)
-let hours = parseInt((duration / (1000*60 * 60)) %24)
-};
