@@ -17,8 +17,13 @@ class DropBoxController {
         this.inputFilesEl.addEventListener('change', e=>{
             console.log(e.target.files);
             this.uploadTask(e.target.files) //vai fazer upload de varios arquivos
-            this.snackModalEl.style.display = "block"
+            this.ModalShow();
+            this.inputFilesEl.value = '';
+           
         })
+    }
+    ModalShow(show = true){
+        this.snackModalEl.style.display = (show) ? 'block' : 'none'
     }
     uploadTask(files){
         let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
@@ -29,8 +34,10 @@ class DropBoxController {
                 ajax.onload = event => { //assim que o ajax é carregado ele executa o try catch
                     try {
                         resolve(JSON.parse(ajax.responseText)) //o resolve da promise é o texto do ajax(JSOn)
+                        this.ModalShow(false)
                     } catch (e) {
                         reject(e); //erro
+                        this.ModalShow(false)
                     }
                 };
                 ajax.onerror = event => {
