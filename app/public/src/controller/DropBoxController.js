@@ -72,6 +72,6 @@ class DropBoxController {
 formatTimeToHuman()
 {
 let seconds = parseInt((duration / 1000 ) /*converte pra segundos*/ % 60) //pega o resto da divisao no caso os minutos
-let minutes = 0
+let minutes = parseInt((duration / (1000*60)) %60)
 let hours = "A"
 };
