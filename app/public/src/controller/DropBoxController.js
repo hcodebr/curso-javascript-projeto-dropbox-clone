@@ -60,8 +60,8 @@ class DropBoxController {
 
         this.progressBarEl.style.width = `${porcentage}%`//Pega a barra e troca dependendo da porcentagem            /*porcentage+'px';*/
        
-        this.nameFileEl.innerHTML = files.name;
-        this.timeLeftEl.innerHTML = ''
+        this.nameFileEl.innerHTML = files.name; //inseri o nome do arquivo dentro do HTML
+        this.timeLeftEl.innerHTML = '' //inseri quanto tempo falta dentro do html
 
         console.log(timespent, timeLeft, porcentage)
     }
@@ -71,5 +71,7 @@ class DropBoxController {
 
 formatTimeToHuman()
 {
-
-}
+let seconds = parseInt((duration / 1000 ) /*converte pra segundos*/ % 60) //pega o resto da divisao no caso os minutos
+let minutes = 0
+let hours = "A"
+};
