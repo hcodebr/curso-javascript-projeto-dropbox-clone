@@ -43,9 +43,7 @@ class DropBoxController {
                 };
                 let formData = new FormData(); //criamos um form data
                 formData.append('input-file', files )   //recebe os files(array recebendo as promises)
-                
-                this.startUpload = Date.now(); //pega o horario que começou o upload
-
+                this.startUploadTime = Date.now();
                 ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
 
             }));
@@ -53,15 +51,25 @@ class DropBoxController {
         return Promise.all(promises) //redebe todas as promises e faz o controle doque deu resolve ou reject
     }
     uploadProgress(event, files){
-        let timeSpent = Date.now() - this.startUpload //pega o tempo gasto 
+        let timespent = Date.now() - this.startUploadTime;
         let loaded = event.loaded;
         let total = event.total;
-       
+
         let porcentage = parseInt((loaded/total) * 100) //pega a quantidade total de bytes, divide pela quantidade ja no upload e faz tudo x100
-        let timeleft = ((100 - porcentage) * timeSpent) / porcentage //calcula a estimativa de tempo
-        this.progressBarEl.style.width = `${porcentage}%`     //Pega a barra e troca dependendo da porcentagem            /*porcentage+'px';*/
+        let timeLeft = ((100 - porcentage) * timespent) / porcentage; //calcula o tempo que falta
+
+        this.progressBarEl.style.width = `${porcentage}%`//Pega a barra e troca dependendo da porcentagem            /*porcentage+'px';*/
+       
         this.nameFileEl.innerHTML = files.name;
         this.timeLeftEl.innerHTML = ''
-        console.log(timeSpent,timeleft, porcentage) //mostra o tempo gasto em cada porcentagem
+
+        console.log(timespent, timeLeft, porcentage)
     }
+
+
 }   
+
+formatTimeToHuman()
+{
+
+}
