@@ -94,14 +94,41 @@ class DropBoxController {
     
 };
 
-getFileIconview(){
+getFileIconview(file){
 
+    switch (file.type) {
+        case 'folder' :
+             return `<li>
+             <svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
+                 <title>1357054_617b.jpg</title>
+                 <defs>
+                     <rect id="mc-content-unknown-large-b" x="43" y="30" width="74" height="100" rx="4"></rect>
+                     <filter x="-.7%" y="-.5%" width="101.4%" height="102%" filterUnits="objectBoundingBox" id="mc-content-unknown-large-a">
+                         <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                         <feColorMatrix values="0 0 0 0 0.858823529 0 0 0 0 0.870588235 0 0 0 0 0.88627451 0 0 0 1 0" in="shadowOffsetOuter1"></feColorMatrix>
+                     </filter>
+                 </defs>
+                 <g fill="none" fill-rule="evenodd">
+                     <g>
+                         <use fill="#000" filter="url(#mc-content-unknown-large-a)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mc-content-unknown-large-b"></use>
+                         <use fill="#F7F9FA" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mc-content-unknown-large-b"></use>
+                     </g>
+                 </g>
+             </svg>
+             <div class="name text-center">Arquivo</div>
+         </li>`;
+            break;
+    
+        default:
+            break;
+    }
 
 }
 getFileView(file){
     return `
     <li>
    ${this.getFileIconview(file)} //pega o icone pois ele varia
+   <div class = "name text-center" > ${file.name} </div> 
 </li>` 
 
 }
