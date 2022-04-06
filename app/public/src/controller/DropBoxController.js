@@ -96,12 +96,12 @@ class DropBoxController {
 
 getFileIconview(){
 
-    
+
 }
-getFileView(){
+getFileView(file){
     return `
     <li>
-   ${this.getFileIconview(file)}
+   ${this.getFileIconview(file)} //pega o icone pois ele varia
 </li>` 
 
 }
