@@ -94,6 +94,16 @@ class DropBoxController {
     
 };
 
-   
+getFileIconview(){
+
+    
+}
+getFileView(){
+    return `
+    <li>
+   ${this.getFileIconview(file)}
+</li>` 
+
+}
 }   
 
