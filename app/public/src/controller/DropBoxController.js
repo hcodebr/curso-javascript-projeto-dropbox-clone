@@ -30,7 +30,7 @@ class DropBoxController {
     });
   }
   firebaseRef(){
-    return firebase.database.ref('files') //o firebase pega os files como referencia(rotas)
+    return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
