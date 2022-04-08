@@ -17,7 +17,12 @@ class DropBoxController {
     });
     this.inputFilesEl.addEventListener("change", (e) => {
       console.log(e.target.files);
-      this.uploadTask(e.target.files); //vai fazer upload de varios arquivos
+      this.uploadTask(e.target.files).then(responses => {
+        responses.forEach(resp => {
+
+        });
+
+      }); //vai fazer upload de varios arquivos
       this.ModalShow();
       this.inputFilesEl.value = "";
     });
