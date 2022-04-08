@@ -6,7 +6,10 @@ class DropBoxController {
     this.progressBarEl = document.querySelector(".mc-progress-bar-fg"); //elemento da barra
     this.nameFileEl = document.querySelector(".filename"); //classe com o nome do arquivo
     this.timeLeftEl = document.querySelector(".timeleft"); //classe do tempo
+  //  this.StartFirebase();
     this.InitEvents();
+
+    
   }
   InitEvents() {
     this.btnSendFileEl.addEventListener("click", (e) => {
