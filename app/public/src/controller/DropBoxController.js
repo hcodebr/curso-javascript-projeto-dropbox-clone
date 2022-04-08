@@ -6,6 +6,7 @@ class DropBoxController {
     this.progressBarEl = document.querySelector(".mc-progress-bar-fg"); //elemento da barra
     this.nameFileEl = document.querySelector(".filename"); //classe com o nome do arquivo
     this.timeLeftEl = document.querySelector(".timeleft"); //classe do tempo
+    
   //  this.StartFirebase();
     this.InitEvents();
 
@@ -30,7 +31,8 @@ class DropBoxController {
     });
   }
   firebaseRef(){
-    return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
+   
+  return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
