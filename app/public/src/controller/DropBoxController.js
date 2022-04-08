@@ -17,15 +17,20 @@ class DropBoxController {
     });
     this.inputFilesEl.addEventListener("change", (e) => {
       console.log(e.target.files);
-      this.uploadTask(e.target.files).then(responses => {
-        responses.forEach(resp => {
-
+      this.uploadTask(e.target.files).then(responses => { //Inicia uma arrow function
+        responses.forEach(resp => { //dentro do array com os arquivos executa um foreach
+          console.log(resp.files['input-file']) //Aqui é pra retornar o arquivo selecionado
+          this.firebaseRef().push().set(resp.files['input-file']) //pega a rota do arquivo e da um push pra coleção do firebase
         });
 
+       
       }); //vai fazer upload de varios arquivos
       this.ModalShow();
       this.inputFilesEl.value = "";
     });
+  }
+  firebaseRef(){
+    return firebase.database.ref('files') //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
