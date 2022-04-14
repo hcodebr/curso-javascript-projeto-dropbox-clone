@@ -1,3 +1,5 @@
+
+
 class DropBoxController {
   constructor() {
     this.inputFilesEl = document.querySelector("#files"); //seletor de arquivos
@@ -9,8 +11,21 @@ class DropBoxController {
     
   //  this.StartFirebase();
     this.InitEvents();
-
+    this.connectFirebase();
     
+  }
+  connectFirebase(){
+    const firebaseConfig = {
+      apiKey: "AIzaSyB8ITSQgukDlphlhB2RZTyPF1nGky8v0MQ",
+      authDomain: "dropbox-clone-ea9d3.firebaseapp.com",
+      projectId: "dropbox-clone-ea9d3",
+      storageBucket: "dropbox-clone-ea9d3.appspot.com",
+      messagingSenderId: "400285203672",
+      appId: "1:400285203672:web:a4dc0b0dff329f425a6bad"
+    };
+  
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
   }
   InitEvents() {
     this.btnSendFileEl.addEventListener("click", (e) => {
@@ -32,7 +47,7 @@ class DropBoxController {
   }
   firebaseRef(){
    
-  return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
+   return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
