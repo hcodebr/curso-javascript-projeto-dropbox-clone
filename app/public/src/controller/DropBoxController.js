@@ -292,11 +292,17 @@ class DropBoxController {
   }
   
   getFileView(file) {
-    return `
-    <li>
+
+    let li = document.createElement('li');
+
+    li.dataset.key = key;
+
+    li.innerHTML =  `
+   
    ${this.getFileIconview(file)} //pega o icone pois ele varia
    <div class = "name text-center" > ${file.name} </div> 
-</li>`;
+`;
+    return li;
   }
 
   ReadFile(){
@@ -310,7 +316,7 @@ class DropBoxController {
         
         console.log(key, data) //retorna os itens dentro do firebase
 
-        this.listFilesEl.appendChild(this.getFileView(data));
+        this.listFilesEl.appendChild(this.getFileView(data, key));
       })
 
     })
