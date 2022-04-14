@@ -8,10 +8,12 @@ class DropBoxController {
     this.progressBarEl = document.querySelector(".mc-progress-bar-fg"); //elemento da barra
     this.nameFileEl = document.querySelector(".filename"); //classe com o nome do arquivo
     this.timeLeftEl = document.querySelector(".timeleft"); //classe do tempo
+    this.listFilesEl = document.querySelector('#list-of-files-and-directories')
     
   //  this.StartFirebase();
     this.InitEvents();
     this.connectFirebase();
+    this.ReadFile();
     
   }
   connectFirebase(){
@@ -300,8 +302,15 @@ class DropBoxController {
   ReadFile(){
 
     this.firebaseRef().on('value', snapshot =>{ //esse snap é a coleção dos files, cada item gera uma key e as informações
-      snapshot.forEach(snapItem => {
+      snapshot.forEach(snapshotItem => {
 
+        this.listFilesEl.innerHTML = ''; //vai adicionar novos itens na view pois
+        let key = snapshotItem.key; //a key unica do item
+        let data = snapshotItem.val(); //os dados do item
+        
+        console.log(key, data) //retorna os itens dentro do firebase
+
+        this.listFilesEl.appendChild(this.getFileView(data));
       })
 
     })
