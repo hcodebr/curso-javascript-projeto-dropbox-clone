@@ -291,7 +291,7 @@ class DropBoxController {
     }
   }
   
-  getFileView(file) {
+  getFileView(file, key) {
 
     let li = document.createElement('li');
 
@@ -308,9 +308,10 @@ class DropBoxController {
   ReadFile(){
 
     this.firebaseRef().on('value', snapshot =>{ //esse snap é a coleção dos files, cada item gera uma key e as informações
+      this.listFilesEl.innerHTML = '';
       snapshot.forEach(snapshotItem => {
 
-        this.listFilesEl.innerHTML = ''; //vai adicionar novos itens na view pois
+        //vai adicionar novos itens na view pois
         let key = snapshotItem.key; //a key unica do item
         let data = snapshotItem.val(); //os dados do item
         
