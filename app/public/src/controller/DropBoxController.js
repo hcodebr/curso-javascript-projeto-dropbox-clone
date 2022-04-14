@@ -126,7 +126,7 @@ class DropBoxController {
   }
 
   getFileIconview(file) {
-    switch (file.type) {
+    switch (file.mimetype) {
       case "folder":
         return `<li>
              <svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
@@ -146,7 +146,7 @@ class DropBoxController {
                  </g>
              </svg>
              <div class="name text-center">Arquivo</div>
-         </li>`;
+         `;
         
         case 'audio/mp3':
             return `<svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
@@ -225,7 +225,7 @@ class DropBoxController {
             </svg>`
         
       
-      case 'image/jpeg':
+      case "image/jpeg":
       case 'image/png':
       case 'image/jpg':
       case 'image/gif':
@@ -297,10 +297,8 @@ class DropBoxController {
 
     li.dataset.key = key;
 
-    li.innerHTML =  `
-   
-   ${this.getFileIconview(file)} //pega o icone pois ele varia
-   <div class = "name text-center" > ${file.name} </div> 
+    li.innerHTML =  ` ${this.getFileIconview(file)} 
+   <div class = "name text-center" > ${file.originalFilename} </div> 
 `;
     return li;
   }
