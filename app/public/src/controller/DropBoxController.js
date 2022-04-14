@@ -296,4 +296,14 @@ class DropBoxController {
    <div class = "name text-center" > ${file.name} </div> 
 </li>`;
   }
+
+  ReadFile(){
+
+    this.firebaseRef().on('value', snapshot =>{ //esse snap é a coleção dos files, cada item gera uma key e as informações
+      snapshot.forEach(snapItem => {
+
+      })
+
+    })
+  }
 }
