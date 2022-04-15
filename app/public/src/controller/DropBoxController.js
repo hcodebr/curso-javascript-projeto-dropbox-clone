@@ -300,7 +300,8 @@ class DropBoxController {
     li.innerHTML =  ` ${this.getFileIconview(file)} 
    <div class = "name text-center" > ${file.originalFilename} </div> 
 `;
-    return li;
+this.InitEventsLi(li)  
+return li;
   }
 
   ReadFile(){
@@ -319,5 +320,13 @@ class DropBoxController {
       })
 
     })
+  }
+  InitEventsLi(li){
+    
+    li.addEventListener('click', e =>{
+
+      li.classList.toggle('selected')
+    })
+
   }
 }
