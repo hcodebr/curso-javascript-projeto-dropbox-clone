@@ -327,6 +327,14 @@ return li;
     
     li.addEventListener('click', e =>{
 
+      if(shiftKey){
+        let firstLi = this.listFilesEl.querySelector('.selected');
+        
+        if(firstLi){
+          
+        }
+
+      }
       if(!e.ctrlKey){ //detecta se o control não ta pressionado
 
         this.listFilesEl.querySelectorAll('li.selected').forEach(el=>{ //da um query slect na class
