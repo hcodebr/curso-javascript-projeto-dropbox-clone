@@ -331,8 +331,15 @@ return li;
         let firstLi = this.listFilesEl.querySelector('.selected');
         
         if(firstLi){
+
+          let indexStart; //Index que começa a "corrente"
+          let indexEnd; //pega o final do array
+          
           li.parentElement.childNodes.forEach((el, index)=>{ //entra dentro da ul e verifica cada li
 
+            if(firstLi === el) indexStart = indexStart//isso serve pra localizar o primeiro index do array que vai ser percorrido
+            if(li ===el) indexEnd = index //pega o valor do ultimo index
+            
 
           })
         }
