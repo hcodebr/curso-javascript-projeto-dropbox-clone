@@ -344,7 +344,12 @@ return li;
 
           });
 
-          let index  = [indexStart, indexEnd].sort();
+          let index  = [indexEnd, indexStart].sort();
+          lis.forEach((el, i) =>{
+            if(i>=index[0] && i<=index[1]){
+              el.classList.add('selected')
+            }
+          })
           console.log(index)
         }
 
