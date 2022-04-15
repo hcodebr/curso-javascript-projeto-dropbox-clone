@@ -299,8 +299,10 @@ class DropBoxController {
 
     li.innerHTML =  ` ${this.getFileIconview(file)} 
    <div class = "name text-center" > ${file.originalFilename} </div> 
+   
 `;
 this.InitEventsLi(li)  
+
 return li;
   }
 
@@ -325,8 +327,17 @@ return li;
     
     li.addEventListener('click', e =>{
 
-      li.classList.toggle('selected')
+      if(!e.ctrlKey){ //detecta se o control não ta pressionado
+
+        this.listFilesEl.querySelectorAll('li.selected').forEach(el=>{ //da um query slect na class
+          //executa um for each que percorre a lista e remove cada selecionado haja outro clique
+          el.classList.remove('selected')//remove o selecionado
+        })
+      }
+   
+      li.classList.toggle('selected') //a classe selected
     })
 
   }
+  
 }
