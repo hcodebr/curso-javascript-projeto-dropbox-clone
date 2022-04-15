@@ -2,6 +2,7 @@
 
 class DropBoxController {
   constructor() {
+    this.onSelectionEvent = new Event('selectonchange');
     this.inputFilesEl = document.querySelector("#files"); //seletor de arquivos
     this.btnSendFileEl = document.querySelector("#btn-send-file"); //botao de enviar arquivos
     this.snackModalEl = document.querySelector("#react-snackbar-root"); //barra de progresso
@@ -30,6 +31,11 @@ class DropBoxController {
     firebase.initializeApp(firebaseConfig);
   }
   InitEvents() {
+
+      this.listFilesEl.addEventListener('selectonchange', e=>{
+        console.log('selectiononchange')
+      });
+
     this.btnSendFileEl.addEventListener("click", (e) => {
       this.inputFilesEl.click();
     });
@@ -326,7 +332,9 @@ return li;
   InitEventsLi(li){
     
     li.addEventListener('click', e =>{
-
+      
+ 
+    this.listFilesEl.dispatchEvent( this.onSelectionEvent)
       if(e.shiftKey){
         let firstLi = this.listFilesEl.querySelector('.selected');
         
@@ -345,8 +353,8 @@ return li;
           });
 
           let index  = [indexEnd, indexStart].sort();
-          lis.forEach((el, i) =>{
-            if(i>=index[0] && i<=index[1]){
+          lis.forEach((el, i)=>{
+            if(i>=index[0] && i<=index[1]){ //pega os valores entre esses 2 indexes e adiciona o eleento
               el.classList.add('selected')
             }
           })
