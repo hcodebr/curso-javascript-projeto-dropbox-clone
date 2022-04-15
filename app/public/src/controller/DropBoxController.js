@@ -331,7 +331,10 @@ return li;
         let firstLi = this.listFilesEl.querySelector('.selected');
         
         if(firstLi){
-          
+          li.parentElement.childNodes.forEach((el, index)=>{ //entra dentro da ul e verifica cada li
+
+
+          })
         }
 
       }
