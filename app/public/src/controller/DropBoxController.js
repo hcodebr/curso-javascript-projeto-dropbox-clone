@@ -48,6 +48,20 @@ class DropBoxController {
       this.listFilesEl.addEventListener('selectonchange', e=>{
         switch (this.getSelection().lenght){
 
+          case 0:
+          this.btnDelete.style.display('none');
+          this.btnRename.style.display('none');
+          break;
+          
+          case 1:
+            this.btnDelete.style.display('block');
+            this.btnRename.style.display('block');
+          break;
+
+          default:
+            this.btnDelete.style.display('block');
+            this.btnRename.style.display('none');
+
 
         }
       });
