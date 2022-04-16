@@ -411,8 +411,11 @@ return li;
         
       }
    
-      li.classList.toggle('selected') //a classe selected
+     
 
+     
+      li.classList.toggle('selected') //a classe selected
+     
       this.listFilesEl.dispatchEvent( this.onSelectionEvent)
     })
 
