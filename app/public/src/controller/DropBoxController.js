@@ -46,6 +46,9 @@ class DropBoxController {
   }
   InitEvents() {
 
+    this.btnRename.addEventListener('click', e=>{
+      let li = this.getSelection()[0];//serve pra pegar o index
+    })
       this.listFilesEl.addEventListener('selectonchange', e=>{ 
         console.log('selectonchange', this.getSelection().length)
 
