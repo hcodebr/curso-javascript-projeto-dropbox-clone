@@ -10,6 +10,12 @@ class DropBoxController {
     this.nameFileEl = document.querySelector(".filename"); //classe com o nome do arquivo
     this.timeLeftEl = document.querySelector(".timeleft"); //classe do tempo
     this.listFilesEl = document.querySelector('#list-of-files-and-directories')
+
+    this.btnNewFolder = document.querySelector('#btn-new-folder');
+    this.btnRename = document.querySelector('#btn-new-rename');
+    this.btnDelete = document.querySelector('#btn-new-delete');
+
+    
     
   //  this.StartFirebase();
     this.InitEvents();
