@@ -12,8 +12,8 @@ class DropBoxController {
     this.listFilesEl = document.querySelector('#list-of-files-and-directories')
 
     this.btnNewFolder = document.querySelector('#btn-new-folder');
-    this.btnRename = document.querySelector('#btn-new-rename');
-    this.btnDelete = document.querySelector('#btn-new-delete');
+    this.btnRename = document.querySelector('#btn-rename');
+    this.btnDelete = document.querySelector('#btn-delete');
 
     
     
@@ -40,31 +40,39 @@ class DropBoxController {
     
   }
   getSelection(){
+    
     return this.listFilesEl.querySelectorAll('.selected')
 
   }
   InitEvents() {
 
-      this.listFilesEl.addEventListener('selectonchange', e=>{
-        switch (this.getSelection().lenght){
+      this.listFilesEl.addEventListener('selectonchange', e=>{ 
+        console.log('selectonchange', this.getSelection().length)
 
-          case 0:
-          this.btnDelete.style.display('none');
-          this.btnRename.style.display('none');
-          break;
+        let lenghtSize = this.getSelection().length
+
+       switch (lenghtSize) {
+         case 0:
+          this.btnDelete.style.display = 'none'; 
+          this.btnRename.style.display= "none";
+      break;
+          case 1: 
+          this.btnDelete.style.display = "block"; 
+          this.btnRename.style.display= "block";
+       
+         
           
-          case 1:
-            this.btnDelete.style.display('block');
-            this.btnRename.style.display('block');
-          break;
-
-          default:
-            this.btnDelete.style.display('block');
-            this.btnRename.style.display('none');
-
-
-        }
-      });
+           
+           break;
+       
+         default:
+          this.btnDelete.style.display = "block"; 
+          this.btnRename.style.display= "none";
+           break;
+       }
+         
+      })
+         
 
     this.btnSendFileEl.addEventListener("click", (e) => {
       this.inputFilesEl.click();
@@ -364,7 +372,7 @@ return li;
     li.addEventListener('click', e =>{
       
  
-    this.listFilesEl.dispatchEvent( this.onSelectionEvent)
+    
       if(e.shiftKey){
         let firstLi = this.listFilesEl.querySelector('.selected');
         
@@ -397,10 +405,15 @@ return li;
         this.listFilesEl.querySelectorAll('li.selected').forEach(el=>{ //da um query slect na class
           //executa um for each que percorre a lista e remove cada selecionado haja outro clique
           el.classList.remove('selected')//remove o selecionado
+          
         })
+
+        
       }
    
       li.classList.toggle('selected') //a classe selected
+
+      this.listFilesEl.dispatchEvent( this.onSelectionEvent)
     })
 
   }
