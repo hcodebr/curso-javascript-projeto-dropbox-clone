@@ -137,6 +137,36 @@ class DropBoxController {
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
   }
+
+  ajax(){
+    return new Promise((resolve, reject)=>{
+      let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
+      ajax.open("POST", "/upload"); //Abrimos a conexãop ajax e passamos a rota upload e o método post
+      ajax.onload = (event) => {
+        //assim que o ajax é carregado ele executa o try catch
+        try {
+          resolve(JSON.parse(ajax.responseText)); //o resolve da promise é o texto do ajax(JSOn)
+          this.ModalShow(false);
+        } catch (e) {
+          reject(e); //erro
+          this.ModalShow(false);
+        }
+      };
+      ajax.onerror = (event) => {
+        reject(event); //Retorna o erro
+      };
+
+      ajax.upload.onprogress = (event) => {
+        console.log(event);
+        this.uploadProgress(event, files);
+      };
+      let formData = new FormData(); //criamos um form data
+      formData.append("input-file", files); //recebe os files(array recebendo as promises)
+      this.startUploadTime = Date.now();
+      ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
+
+    })
+  }
   uploadTask(files) {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
@@ -144,30 +174,7 @@ class DropBoxController {
       promises.push(
         new Promise((resolve, reject) => {
           //pega o array vazio e da push nas promises
-          let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
-          ajax.open("POST", "/upload"); //Abrimos a conexãop ajax e passamos a rota upload e o método post
-          ajax.onload = (event) => {
-            //assim que o ajax é carregado ele executa o try catch
-            try {
-              resolve(JSON.parse(ajax.responseText)); //o resolve da promise é o texto do ajax(JSOn)
-              this.ModalShow(false);
-            } catch (e) {
-              reject(e); //erro
-              this.ModalShow(false);
-            }
-          };
-          ajax.onerror = (event) => {
-            reject(event); //Retorna o erro
-          };
-
-          ajax.upload.onprogress = (event) => {
-            console.log(event);
-            this.uploadProgress(event, files);
-          };
-          let formData = new FormData(); //criamos um form data
-          formData.append("input-file", files); //recebe os files(array recebendo as promises)
-          this.startUploadTime = Date.now();
-          ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
+       
         })
       );
     }); //convertemos em array e usamos o spread
