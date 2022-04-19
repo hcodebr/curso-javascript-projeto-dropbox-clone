@@ -46,6 +46,11 @@ class DropBoxController {
   }
   InitEvents() {
 
+    this.btnDelete.addEventListener('click', e=>{
+      
+
+    })
+
     this.btnRename.addEventListener('click', e=>{ //add o evento no rename
       let li = this.getSelection()[0];//serve pra pegar o index
       console.log(li)
