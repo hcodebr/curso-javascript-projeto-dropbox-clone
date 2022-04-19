@@ -44,12 +44,24 @@ class DropBoxController {
     return this.listFilesEl.querySelectorAll('.selected')
 
   }
+
+  removeTask(){
+    let promises = []; //array que vai receber a coleção de promises, ppis pode receber mais de um email
+
+    this.getSelection().forEach(li=>{ //getSelection(,étodo que retorna o li selecionado)
+
+
+    })
+
+  }
+
+  
   InitEvents() {
 
     this.btnDelete.addEventListener('click', e=>{
-        this.removeTask().then(response=>{ //método 
+        this.removeTask().then(response=>{ //método de remoção que recebe a promise
           console.log('response')
-        }).catch(err=>{
+        }).catch(err=>{ //catch error pra retornar erro caso haja
 
           console.log(err)
         })
