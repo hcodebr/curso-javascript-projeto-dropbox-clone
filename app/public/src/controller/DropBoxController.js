@@ -138,10 +138,10 @@ class DropBoxController {
     this.snackModalEl.style.display = show ? "block" : "none";
   }
 
-  ajax(){
+  ajax(method, url){
     return new Promise((resolve, reject)=>{
       let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
-      ajax.open("POST", "/upload"); //Abrimos a conexãop ajax e passamos a rota upload e o método post
+      ajax.open(method, url); //Abrimos a conexãop ajax e passamos a rota upload e o método post
       ajax.onload = (event) => {
         //assim que o ajax é carregado ele executa o try catch
         try {
@@ -175,7 +175,7 @@ class DropBoxController {
       promises.push(
         new Promise((resolve, reject) => {
           //pega o array vazio e da push nas promises
-          this.ajax
+          this.ajax("POST", '/upload');
        
         })
       );
