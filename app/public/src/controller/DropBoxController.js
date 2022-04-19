@@ -50,7 +50,13 @@ class DropBoxController {
 
     this.getSelection().forEach(li=>{ //getSelection(,étodo que retorna o li selecionado)
 
+      let file = JSON.parse(li.dataset.file); //recebe os valores  do arquivo no formato JSON
 
+      promises.push(new Promise((resolve, reject)=>{
+
+
+      }))
+      return Promise.all(promises)
     })
 
   }
