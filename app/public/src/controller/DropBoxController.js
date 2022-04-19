@@ -167,6 +167,7 @@ class DropBoxController {
 
     })
   }
+
   uploadTask(files) {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
@@ -174,6 +175,7 @@ class DropBoxController {
       promises.push(
         new Promise((resolve, reject) => {
           //pega o array vazio e da push nas promises
+          this.ajax
        
         })
       );
