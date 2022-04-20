@@ -9,7 +9,7 @@ class DropBoxController {
     this.progressBarEl = document.querySelector(".mc-progress-bar-fg"); //elemento da barra
     this.nameFileEl = document.querySelector(".filename"); //classe com o nome do arquivo
     this.timeLeftEl = document.querySelector(".timeleft"); //classe do tempo
-    this.listFilesEl = document.querySelector('#list-of-files-and-directories')
+    this.listFilesEl = document.querySelector('#list-of-files-and-directories')  //diretorios
 
     this.btnNewFolder = document.querySelector('#btn-new-folder');
     this.btnRename = document.querySelector('#btn-rename');
@@ -23,7 +23,7 @@ class DropBoxController {
     this.ReadFile();
     
   }
-  connectFirebase(){
+  connectFirebase(){ //chave do firebase
     const firebaseConfig = {
       apiKey: "AIzaSyB8ITSQgukDlphlhB2RZTyPF1nGky8v0MQ",
       authDomain: "dropbox-clone-ea9d3.firebaseapp.com",
@@ -41,7 +41,7 @@ class DropBoxController {
   }
   getSelection(){
     
-    return this.listFilesEl.querySelectorAll('.selected')
+    return this.listFilesEl.querySelectorAll('.selected') //retorna o LI selecionado
 
   }
 
@@ -423,7 +423,7 @@ class DropBoxController {
     let li = document.createElement('li');
    
     
-    li.dataset.key = key;
+    li.dataset.key = key; //key dos dados
     li.dataset.file = JSON.stringify(file); //peg ao obj file e converte pra texto e passa la pra cima
    
     
