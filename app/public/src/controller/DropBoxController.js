@@ -138,7 +138,7 @@ class DropBoxController {
     this.snackModalEl.style.display = show ? "block" : "none";
   }
 
-  ajax(url, method = 'GET'){ //passando um método padrão
+  ajax(url, method = 'GET', formData = new FormData()){ //passando um método padrão
     return new Promise((resolve, reject)=>{
       let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
       ajax.open(method, url); //Abrimos a conexãop ajax e passamos a rota upload e o método post
