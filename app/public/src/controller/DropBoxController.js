@@ -389,22 +389,45 @@ class DropBoxController {
 
 
   getFileView(file, key) {
-    let fileType = file.mimetype
-     nameWithDot = file.originalFilename  + 'reste'
+    var fileType = file.mimetype
+    switch (fileType) {
+      
+      case "image/jpeg":
+        case 'image/png':
+        case 'image/jpg':
+        case 'image/gif':
+        case 'image/webp':
+
+    var fileType = fileType.replace('image/', '.')
+    break;
+    
+    case 'audio/mp3':
+      fileType.replace('audio/', '.')
+    break;
+
+    case 'video/mp4':
+      fileType.replace('video/mp4', '.')
+      break;
+
+      case 'application/pdf':
+        fileType.replace('application/', '.')
+
+      break;
+    default:
+     
+      break;
+      
+
+
+    }
     let li = document.createElement('li');
    
     
     li.dataset.key = key;
     li.dataset.file = JSON.stringify(file); //peg ao obj file e converte pra texto e passa la pra cima
-    switch (fileType) {
-      
-      case value:
-        
-        break;
+   
     
-      default:
-        break;
-    }
+   let  nameWithDot = file.originalFilename  + fileType
     li.innerHTML =  ` ${this.getFileIconview(file)} 
    <div class = "name text-center" > ${nameWithDot } </div> 
    
