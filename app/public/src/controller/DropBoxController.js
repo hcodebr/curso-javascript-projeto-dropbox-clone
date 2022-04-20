@@ -170,8 +170,14 @@ class DropBoxController {
       //criamos um spread para
       promises.push(
         new Promise((resolve, reject) => {
+          let formData = new FormData();
+          formData.append('input-file', files)
           //pega o array vazio e da push nas promises
-          this.ajax("POST", '/upload');
+          this.ajax('/upload', 'POST', formData, ()=>{
+            this.uploadProgress(event, files);
+          }, ()=>{
+               this.startUploadTime();
+          });
        
         })
       );
