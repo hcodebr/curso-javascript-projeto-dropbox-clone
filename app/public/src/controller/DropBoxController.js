@@ -179,7 +179,7 @@ class DropBoxController {
             this.uploadProgress(events, files);
           }, ()=>{
                this.startUploadTime = Date.now();
-          });
+          }).then().catch();
        
         }));
     }); 
