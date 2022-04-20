@@ -87,7 +87,7 @@ class DropBoxController {
     })
       this.listFilesEl.addEventListener('selectonchange', e=>{ 
         console.log('selectonchange', this.getSelection().length)
-
+        
         let lenghtSize = this.getSelection().length
 
        switch (lenghtSize) {
@@ -386,15 +386,27 @@ class DropBoxController {
     }
   }
   
+
+
   getFileView(file, key) {
-
+    let fileType = file.mimetype
+     nameWithDot = file.originalFilename  + 'reste'
     let li = document.createElement('li');
-
+   
+    
     li.dataset.key = key;
     li.dataset.file = JSON.stringify(file); //peg ao obj file e converte pra texto e passa la pra cima
-
+    switch (fileType) {
+      
+      case value:
+        
+        break;
+    
+      default:
+        break;
+    }
     li.innerHTML =  ` ${this.getFileIconview(file)} 
-   <div class = "name text-center" > ${file.originalFilename} </div> 
+   <div class = "name text-center" > ${nameWithDot } </div> 
    
 `;
 this.InitEventsLi(li)  
@@ -415,6 +427,7 @@ return li;
         console.log(key, data) //retorna os itens dentro do firebase
 
         this.listFilesEl.appendChild(this.getFileView(data, key));
+        
       })
 
     })
