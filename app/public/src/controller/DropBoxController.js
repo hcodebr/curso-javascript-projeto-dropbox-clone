@@ -138,7 +138,7 @@ class DropBoxController {
     this.snackModalEl.style.display = show ? "block" : "none";
   }
 
-  ajax(method, url){
+  ajax(url, method = 'GET'){ //passando um método padrão
     return new Promise((resolve, reject)=>{
       let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
       ajax.open(method, url); //Abrimos a conexãop ajax e passamos a rota upload e o método post
@@ -160,8 +160,7 @@ class DropBoxController {
         console.log(event);
         this.uploadProgress(event, files);
       };
-      let formData = new FormData(); //criamos um form data
-      formData.append("input-file", files); //recebe os files(array recebendo as promises)
+      
       this.startUploadTime = Date.now();
       ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
 
