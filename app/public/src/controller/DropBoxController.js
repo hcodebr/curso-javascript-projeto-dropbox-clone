@@ -156,9 +156,9 @@ class DropBoxController {
         reject(event); //Retorna o erro
       };
 
-      ajax.upload.onprogress = onprogress;
+      ajax.upload.onprogress = onprogress; //recebe o valor pelo parametro
       
-      startUploadTime();
+      startUploadTime(); //recebe o valor pelo parametro
       ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
 
     })
