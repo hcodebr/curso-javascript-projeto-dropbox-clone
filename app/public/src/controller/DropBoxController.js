@@ -139,6 +139,7 @@ class DropBoxController {
   }
 
   ajax(url, method = 'GET', formData = new FormData(), onprogress = function(){}, startUploadTime = function(){}){ //passando um método padrão
+
     return new Promise((resolve, reject)=>{
       let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
       ajax.open(method, url); //Abrimos a conexãop ajax e passamos a rota upload e o método post
@@ -152,6 +153,7 @@ class DropBoxController {
           this.ModalShow(false);
         }
       };
+
       ajax.onerror = (event) => {
         reject(event); //Retorna o erro
       };
@@ -168,15 +170,15 @@ class DropBoxController {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
       //criamos um spread para
-      promises.push(
-        new Promise((resolve, reject) => {
+      promises.push(new Promise((resolve, reject) => {
           let formData = new FormData();
           formData.append('input-file', files)
           //pega o array vazio e da push nas promises
+
           this.ajax('/upload', 'POST', formData, ()=>{
             this.uploadProgress(event, files);
           }, ()=>{
-               this.startUploadTime();
+               this.startUploadTime() = Date.now();
           });
        
         })
