@@ -22,8 +22,8 @@ router.delete('/file', (req, res)=>{
       let path = "./" +   fields.path
 
       if(fs.existsSync(path)){
+          fs.unlink();//remove arquivo fisico
 
-        
       }
       res.json({
         fields
