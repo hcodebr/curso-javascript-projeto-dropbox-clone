@@ -169,18 +169,15 @@ class DropBoxController {
   uploadTask(files) {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
-      //criamos um spread para
-      promises.push(new Promise((resolve, reject) => {
-          let formData = new FormData();
-          formData.append('input-file', files)
-          //pega o array vazio e da push nas promises
-
-          this.ajax('/upload', 'POST', formData, ()=>{
-            this.uploadProgress(events, files);
-          }, ()=>{
-               this.startUploadTime = Date.now();
-          }).then().catch();
-       
+      let formData = new FormData();
+      formData.append('input-file', files)
+      //pega o array vazio e da push nas promises
+      promises.push(
+        
+        this.ajax('/upload', 'POST', formData, ()=>{
+          this.uploadProgress(events, files);
+        }, ()=>{
+             this.startUploadTime = Date.now();
         }));
     }); 
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
