@@ -25,14 +25,19 @@ router.delete('/file', (req, res)=>{
           fs.unlink(path, err=>{
 
             if(err){
-              res.status(400).json();
+              res.status(400).json({
+                err
+              });
+              }else{
+
+              res.json({
+                fields
+              })
             }
           });//remove arquivo fisico
 
       }
-      res.json({
-        fields
-      })
+     
     })
 
 });
