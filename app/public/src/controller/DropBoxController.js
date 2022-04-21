@@ -52,10 +52,11 @@ class DropBoxController {
 
       let file = JSON.parse(li.dataset.file); //recebe os valores  do arquivo no formato JSON
 
-      promises.push(new Promise((resolve, reject)=>{
-
-
-      }))
+      promises.push('/file', 'DELETE', formData, ()=>{
+        this.uploadProgress(events, files);
+      }, ()=>{
+           this.startUploadTime = Date.now();
+      })
       return Promise.all(promises)
     })
 
