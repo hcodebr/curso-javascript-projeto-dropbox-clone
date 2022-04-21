@@ -51,9 +51,9 @@ class DropBoxController {
     this.getSelection().forEach(li=>{ //getSelection(,étodo que retorna o li selecionado)
 
       let file = JSON.parse(li.dataset.file); //recebe os valores  do arquivo no formato JSON
-
+      let key = li.dataset.key;
       let formData = new FormData()
-
+     
       formData.append('path', file.path);
       formData.append('key', file.key);
       promises.push(this.ajax('/file', 'DELETE', formData))
@@ -67,8 +67,12 @@ class DropBoxController {
   InitEvents() {
 
     this.btnDelete.addEventListener('click', e=>{
-        this.removeTask().then(response=>{ //método de remoção que recebe a promise
-          console.log('response')
+        this.removeTask().then(responses=>{ //método de remoção que recebe a promise
+          responses.forEach(response=>{
+            if (response.field.key) {
+              this.firebaseRef().child(response.field.key).remove();
+            }
+          })
         }).catch(err=>{ //catch error pra retornar erro caso haja
 
           console.log(err)
