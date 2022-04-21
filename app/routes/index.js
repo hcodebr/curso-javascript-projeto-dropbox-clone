@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var formidable = require('formidable'); //instalando o formidable
+var fs = require('fs') //nativo do node para tratar arquivos
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,8 +18,15 @@ router.delete('/file', (req, res)=>{
       //recebendo o req(JSON), e na arrow function ele recebe o erro(caso haja), 
       //o fields e o files separa os dados enviados via post para verificar oque é arquivo e oque nao é
       //colocando em 2 JSONS diferentes
+
+      let path = "./" +   fields.path
+
+      if(fs.existsSync(path)){
+
+        
+      }
       res.json({
-        files
+        fields
       })
     })
 
