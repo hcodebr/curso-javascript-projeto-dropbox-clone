@@ -121,6 +121,7 @@ class DropBoxController {
       this.uploadTask(e.target.files).then(responses => { //Inicia uma arrow function
         responses.forEach(resp => { //dentro do array com os arquivos executa um foreach
           console.log(resp.files['input-file']) //Aqui é pra retornar o arquivo selecionado
+          this.inputFilesEl
           this.firebaseRef().push().set(resp.files['input-file']) //pega a rota do arquivo e da um push pra coleção do firebase
         });
 
@@ -171,6 +172,7 @@ class DropBoxController {
     [...files].forEach((files) => {
       let formData = new FormData();
       formData.append('input-file', files)
+      
       //pega o array vazio e da push nas promises
       promises.push(
         
@@ -399,15 +401,15 @@ class DropBoxController {
     break;
     
     case 'audio/mp3':
-      fileType.replace('audio/', '.')
+      var fileType = fileType.replace('audio/', '.')
     break;
 
     case 'video/mp4':
-      fileType.replace('video/mp4', '.')
+      var fileType =  fileType.replace('video/mp4', '.')
       break;
 
       case 'application/pdf':
-        fileType.replace('application/', '.')
+        var fileType = fileType.replace('application/', '.')
 
       break;
     default:
