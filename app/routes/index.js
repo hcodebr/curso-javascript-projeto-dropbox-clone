@@ -22,7 +22,12 @@ router.delete('/file', (req, res)=>{
       let path = "./" +   fields.path
 
       if(fs.existsSync(path)){
-          fs.unlink();//remove arquivo fisico
+          fs.unlink(path, err=>{
+
+            if(err){
+              res.status(400);
+            }
+          });//remove arquivo fisico
 
       }
       res.json({
