@@ -45,8 +45,9 @@ class DropBoxController {
 
   }
 
-  removeTask(){
-    let promises = [];
+  removeTask( ){
+    
+let promises = [];
 
     this.getSelection().forEach((li) => {
       let file = JSON.parse(li.dataset.file);
@@ -54,22 +55,33 @@ class DropBoxController {
 
       let formData = new FormData()
 
-      formData.append('path', file.path);
+      formData.append('path', file.filepath);
       formData.append('key', key);
 
       promises.push(
         
-        this.ajax('/file', 'DELETE', formData, ()=>{
-          this.uploadProgress(event, files);
-        }, ()=>{
-             this.startUploadTime = Date.now();
-            
-             console.log('teste ',promises)
-        }));
-        
+        this.ajax('/file', 'DELETE', formData));
+        console.log(promises)
     });
     
     return Promise.all(promises);
+/*
+
+    let promises = []; //array que vai receber a coleção de promises, ppis pode receber mais de um email
+
+    this.getSelection().forEach(li=>{ //getSelection(,étodo que retorna o li selecionado)
+
+      let file = JSON.parse(li.dataset.file); //recebe os valores  do arquivo no formato JSON
+      let key = li.dataset.key;
+      promises.push(new Promise((resolve, reject)=>{
+        let formData = new FormData();
+        formData.append('path', file.filepath);
+        formData.append('key', key);
+        promises.push(this.ajax('/file', 'DELETE', formData));
+      }))
+      return Promise.all(promises)
+    })
+*/
   }
 
   
@@ -80,7 +92,7 @@ class DropBoxController {
         this.removeTask().then(responses=> { //método de remoção que recebe a promise
           responses.forEach((response)=>{
             console.log("teste2")
-            if (response.fields.key) {
+            if (response.files.key) {
               this.firebaseRef().child(response.fields.key).remove();
             }
           })
@@ -197,7 +209,7 @@ class DropBoxController {
           this.uploadProgress(event, files);
         }, ()=>{
              this.startUploadTime = Date.now();
-             console.log('teste ',promises)
+             console.log('teste',formData)
         }));
     }); 
    
