@@ -46,42 +46,49 @@ class DropBoxController {
   }
 
   removeTask(){
-    let promises = []; //array que vai receber a coleção de promises, ppis pode receber mais de um email
+    let promises = [];
 
-    this.getSelection().forEach(li=>{ //getSelection(,étodo que retorna o li selecionado)
-
-      let file = JSON.parse(li.dataset.file); //recebe os valores  do arquivo no formato JSON
+    this.getSelection().forEach((li) => {
+      let file = JSON.parse(li.dataset.file);
       let key = li.dataset.key;
-      let formData = new FormData()
-     
-      formData.append('path', file.filepath);
-      formData.append('key', key);
-      promises.push(this.ajax('/file', 'DELETE', formData))
 
-     console.log("fiz  o for each")
-    })
-    return Promise.all(promises)
+      let formData = new FormData()
+
+      formData.append('path', file.path);
+      formData.append('key', key);
+
+      promises.push(
+        
+        this.ajax('/file', 'DELETE', formData, ()=>{
+          this.uploadProgress(event, files);
+        }, ()=>{
+             this.startUploadTime = Date.now();
+            
+             console.log('teste ',promises)
+        }));
+        
+    });
+    
+    return Promise.all(promises);
   }
 
   
   InitEvents() {
     
-    this.btnDelete.addEventListener("click", (e) => {
-      this.removeTask()
-        .then((responses) => {
-
-          responses.forEach(response => {
+    this.btnDelete.addEventListener("click", e=>{
+      console.log("teste1")
+        this.removeTask().then(responses=> { //método de remoção que recebe a promise
+          responses.forEach((response)=>{
+            console.log("teste2")
             if (response.fields.key) {
-              this.getFirebaseRef().child
-              (response.fields.key).remove();
+              this.firebaseRef().child(response.fields.key).remove();
             }
           })
+        }).catch((err)=>{ //catch error pra retornar erro caso haja
 
-          console.log("responses");
-        })
-        .catch((err) => {
-          console.log(err);
+          console.log(err)
         });
+
     });
 
     this.btnRename.addEventListener('click', e=>{ //add o evento no rename
@@ -187,11 +194,13 @@ class DropBoxController {
       promises.push(
         
         this.ajax('/upload', 'POST', formData, ()=>{
-          this.uploadProgress(events, files);
+          this.uploadProgress(event, files);
         }, ()=>{
              this.startUploadTime = Date.now();
+             console.log('teste ',promises)
         }));
     }); 
+   
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
   }
   uploadProgress(event, files) {
@@ -456,7 +465,7 @@ return li;
         let key = snapshotItem.key; //a key unica do item
         let data = snapshotItem.val(); //os dados do item
         
-        console.log(key, data) //retorna os itens dentro do firebase
+      //  console.log(key, data) //retorna os itens dentro do firebase
 
         this.listFilesEl.appendChild(this.getFileView(data, key));
         
