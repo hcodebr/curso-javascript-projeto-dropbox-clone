@@ -19,7 +19,7 @@ router.delete('/file', (req, res)=>{
       //o fields e o files separa os dados enviados via post para verificar oque é arquivo e oque nao é
       //colocando em 2 JSONS diferentes
 
-      let path = "./" +   fields.filepath
+      let path = '/' +   fields.filepath
 
       if(fs.existsSync(path)){
           fs.unlink(path, err=>{

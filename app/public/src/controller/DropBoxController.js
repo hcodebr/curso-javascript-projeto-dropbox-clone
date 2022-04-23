@@ -54,32 +54,35 @@ class DropBoxController {
       let key = li.dataset.key;
       let formData = new FormData()
      
-      formData.append('filepath', file.filepath);
+      formData.append('path', file.filepath);
       formData.append('key', key);
       promises.push(this.ajax('/file', 'DELETE', formData))
 
-     
+     console.log("fiz  o for each")
     })
     return Promise.all(promises)
   }
 
   
   InitEvents() {
+    
+    this.btnDelete.addEventListener("click", (e) => {
+      this.removeTask()
+        .then((responses) => {
 
-    this.btnDelete.addEventListener('click', e=>{
-        this.removeTask().then(responses=>{ //método de remoção que recebe a promise
-          responses.forEach(response=>{
+          responses.forEach(response => {
             if (response.fields.key) {
-              this.firebaseRef().child
+              this.getFirebaseRef().child
               (response.fields.key).remove();
             }
           })
-        }).catch(err=>{ //catch error pra retornar erro caso haja
 
-          console.log(err)
+          console.log("responses");
         })
-
-    })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
 
     this.btnRename.addEventListener('click', e=>{ //add o evento no rename
       let li = this.getSelection()[0];//serve pra pegar o index
@@ -146,7 +149,7 @@ class DropBoxController {
     this.snackModalEl.style.display = show ? "block" : "none";
   }
 
-  ajax(url, method = 'GET', formData = new FormData(), onprogress = function(){}, startUploadTime = function(){}){ //passando um método padrão
+  ajax(url, method , formData = new FormData(), onprogress = function(){}, startUploadTime = function(){}){ //passando um método padrão
 
     return new Promise((resolve, reject)=>{
       let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
