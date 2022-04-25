@@ -2,6 +2,8 @@
 
 class DropBoxController {
   constructor() {
+
+    this.current = ['files']; //definindo a pasta root 
     this.onSelectionEvent = new Event('selectonchange');
     this.inputFilesEl = document.querySelector("#files"); //seletor de arquivos
     this.btnSendFileEl = document.querySelector("#btn-send-file"); //botao de enviar arquivos
