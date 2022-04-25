@@ -3,7 +3,7 @@
 class DropBoxController {
   constructor() {
 
-    this.current = ['files']; //definindo a pasta root 
+    this.current = ['hcode']; //definindo uma referência inicial(root)
     this.onSelectionEvent = new Event('selectonchange');
     this.inputFilesEl = document.querySelector("#files"); //seletor de arquivos
     this.btnSendFileEl = document.querySelector("#btn-send-file"); //botao de enviar arquivos
@@ -89,6 +89,28 @@ let promises = [];
   
   InitEvents() {
     
+
+    this.btnNewFolder.addEventListener("click", e=>{
+      let name = prompt('Nome da pasta:')
+    
+      if(name){
+
+     
+
+          this.firebaseRef().push().set({
+           originalFilename: name,
+            mimetype : 'folder',
+            path: this.current.join('/')
+
+           
+               
+
+          });
+           
+          
+      }
+
+    })
     this.btnDelete.addEventListener("click", e=>{
       console.log("teste1")
         this.removeTask().then(responses=> { //método de remoção que recebe a promise
@@ -254,26 +276,15 @@ let promises = [];
 
   getFileIconview(file) {
     switch (file.mimetype) {
-      case "folder":
-        return `<li>
-             <svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
-                 <title>1357054_617b.jpg</title>
-                 <defs>
-                     <rect id="mc-content-unknown-large-b" x="43" y="30" width="74" height="100" rx="4"></rect>
-                     <filter x="-.7%" y="-.5%" width="101.4%" height="102%" filterUnits="objectBoundingBox" id="mc-content-unknown-large-a">
-                         <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-                         <feColorMatrix values="0 0 0 0 0.858823529 0 0 0 0 0.870588235 0 0 0 0 0.88627451 0 0 0 1 0" in="shadowOffsetOuter1"></feColorMatrix>
-                     </filter>
-                 </defs>
-                 <g fill="none" fill-rule="evenodd">
-                     <g>
-                         <use fill="#000" filter="url(#mc-content-unknown-large-a)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mc-content-unknown-large-b"></use>
-                         <use fill="#F7F9FA" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mc-content-unknown-large-b"></use>
-                     </g>
-                 </g>
-             </svg>
-             <div class="name text-center">Arquivo</div>
-         `;
+      case 'folder':
+        return `
+        <svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
+            <title>content-folder-large</title>
+            <g fill="none" fill-rule="evenodd">
+                <path d="M77.955 53h50.04A3.002 3.002 0 0 1 131 56.007v58.988a4.008 4.008 0 0 1-4.003 4.005H39.003A4.002 4.002 0 0 1 35 114.995V45.99c0-2.206 1.79-3.99 3.997-3.99h26.002c1.666 0 3.667 1.166 4.49 2.605l3.341 5.848s1.281 2.544 5.12 2.544l.005.003z" fill="#71B9F4"></path>
+                <path d="M77.955 52h50.04A3.002 3.002 0 0 1 131 55.007v58.988a4.008 4.008 0 0 1-4.003 4.005H39.003A4.002 4.002 0 0 1 35 113.995V44.99c0-2.206 1.79-3.99 3.997-3.99h26.002c1.666 0 3.667 1.166 4.49 2.605l3.341 5.848s1.281 2.544 5.12 2.544l.005.003z" fill="#92CEFF"></path>
+            </g>
+        </svg>`;
         
         case 'audio/mp3':
             return `<svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
