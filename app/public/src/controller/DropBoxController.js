@@ -101,7 +101,7 @@ let promises = [];
           this.firebaseRef().push().set({
            originalFilename: name,
             mimetype : 'folder',
-            path: this.current + '/'
+            path: this.current.join('/')
 
            
                
