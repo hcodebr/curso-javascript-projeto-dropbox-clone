@@ -185,8 +185,9 @@ let promises = [];
       this.inputFilesEl.value = "";
     });
   }
-  firebaseRef(){
+  firebaseRef(path){
    
+    if(!path) path = this.current.join('/'); //método join une valores de array
    return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
@@ -511,7 +512,7 @@ return li;
         let file = JSON.parse(li.dataset.file);
         switch (file.mimetype) {
           case 'folder':
-            this.currentFolder.push(file.originalFilename)
+            this.current.push(file.originalFilename)
             this.openFolder();
             console.log('click')
             break;
