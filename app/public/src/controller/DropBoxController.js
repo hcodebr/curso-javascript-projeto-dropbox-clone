@@ -20,6 +20,7 @@ class DropBoxController {
     
     
   //  this.StartFirebase();
+    this.openFolder();
     this.InitEvents();
     this.connectFirebase();
     this.ReadFile();
@@ -497,6 +498,9 @@ return li;
       })
 
     })
+  }
+  openFolder(){
+
   }
   InitEventsLi(li){
     li.addEventListener('click', e=>{
