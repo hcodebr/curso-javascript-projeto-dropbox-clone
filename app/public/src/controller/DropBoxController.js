@@ -512,7 +512,7 @@ return li;
 
   }
   InitEventsLi(li){
-    li.addEventListener('click', e=>{
+    li.addEventListener('dblclick', e=>{
         let file = JSON.parse(li.dataset.file);
         switch (file.mimetype) {
           case 'folder':
