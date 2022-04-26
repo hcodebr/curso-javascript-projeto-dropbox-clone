@@ -499,7 +499,18 @@ return li;
     })
   }
   InitEventsLi(li){
-    
+    li.addEventListener('dbclick', e=>{
+        let file = JSON.parse(li.dataset.file);
+        switch (file.mimetype) {
+          case 'folder':
+            alert("teste")
+            break;
+        
+          default:
+            break;
+        }
+
+    })
     li.addEventListener('click', e =>{
       
  
