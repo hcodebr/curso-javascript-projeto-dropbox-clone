@@ -23,7 +23,7 @@ class DropBoxController {
     this.openFolder();
     this.InitEvents();
     this.connectFirebase();
-    this.ReadFile();
+    
     
   }
   connectFirebase(){ //chave do firebase
@@ -500,6 +500,10 @@ return li;
     })
   }
   openFolder(){
+
+    if(this.lastFolder)  this.firebaseRef(this.lastFolder).off('value') //recebe o valor da ultima pasta acesada
+    //e para de "ouvir" os eventos dela
+    this.ReadFile();
 
   }
   InitEventsLi(li){
