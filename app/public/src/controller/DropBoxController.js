@@ -20,10 +20,10 @@ class DropBoxController {
     
     
   //  this.StartFirebase();
-    this.openFolder();
+   
     this.InitEvents();
     this.connectFirebase();
-    
+    this.openFolder();
     
   }
   connectFirebase(){ //chave do firebase
@@ -185,10 +185,11 @@ let promises = [];
       this.inputFilesEl.value = "";
     });
   }
-  firebaseRef(path){
+  firebaseRef(Filepath){
    
-    if(!path) path = this.current.join('/'); //método join une valores de array
-   return firebase.database().ref('files') //o firebase pega os files como referencia(rotas)
+      if(!Filepath) {Filepath = this.current.join('/'); //método join une valores de array
+    }
+   return firebase.database().ref(Filepath) //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
@@ -484,6 +485,7 @@ return li;
 
   ReadFile(){
 
+    this.lastFolder = this.current.join('/'); //armazena todas as pastas sempre
     this.firebaseRef().on('value', snapshot =>{ //esse snap é a coleção dos files, cada item gera uma key e as informações
       this.listFilesEl.innerHTML = '';
       snapshot.forEach(snapshotItem => {
@@ -502,7 +504,9 @@ return li;
   }
   openFolder(){
 
-    if(this.lastFolder)  this.firebaseRef(this.lastFolder).off('value') //recebe o valor da ultima pasta acesada
+    if(this.lastFolder) {
+      this.firebaseRef(this.lastFolder).off('value') //recebe o valor da ultima pasta acesada
+    } 
     //e para de "ouvir" os eventos dela
     this.ReadFile();
 
