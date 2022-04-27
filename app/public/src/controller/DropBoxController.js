@@ -505,7 +505,7 @@ class DropBoxController {
           //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
           `
        <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
-      <a href="" class="breadcrumb-segment">${folderName}</a>
+      <a href="#" data-path="${path.join('/')}" class="breadcrumb-segment">${folderName}</a>
              </span>
         <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
                  <title>arrow-right</title>
