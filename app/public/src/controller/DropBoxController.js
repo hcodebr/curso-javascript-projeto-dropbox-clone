@@ -519,13 +519,13 @@ class DropBoxController {
     }
 
     this.navEl.innerHTML = nav.innerHTML; // para ocupar o lugar do outro nav ja criado la encima
-    this.navEl.querySelectorAll('a').forEach(a=>{
+    this.navEl.querySelectorAll('a').forEach(a=>{  //os vans tem um href dentro deles, aqui ele pega todos e lança um forEACH
 
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        this.current  =  a.dataset.path.split('/');
+      a.addEventListener('click', e=>{ //coloca event listener no href
+        e.preventDefault(); //nao deixa ter o default
+        this.current  =  a.dataset.path.split('/'); //pega o diretoiro passado dentro do href e faz um split pra tornar um array separado com /
        
-        this.openFolder();
+        this.openFolder(); //renderiza o arquivo
       })
 
     })
