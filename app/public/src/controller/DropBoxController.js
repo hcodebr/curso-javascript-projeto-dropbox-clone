@@ -513,10 +513,12 @@ class DropBoxController {
                                fill-rule="evenodd"></path>
                                             </svg>
        `;
-        nav.appendChild(span);
+        
       }
+      nav.appendChild(span);
     }
 
+    this.navEl.innerHTML = nav.innerHTML; // para ocupar o lugar do outro nav ja criado la encima
     /*
      <span>
                                     <h1 class="ax-visually-hidden">Meus Arquivos</h1>
