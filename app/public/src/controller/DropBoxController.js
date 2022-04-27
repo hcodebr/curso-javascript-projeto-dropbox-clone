@@ -2,7 +2,7 @@
 
 class DropBoxController {
   constructor() {
-
+    this.navEl = document.querySelector("#browse-location"); //barra de naveação
     this.current = ['hcode']; //definindo uma referência inicial(root)
     this.onSelectionEvent = new Event('selectonchange');
     this.inputFilesEl = document.querySelector("#files"); //seletor de arquivos
@@ -495,8 +495,8 @@ return li;
         let data = snapshotItem.val(); //os dados do item
         
       //  console.log(key, data) //retorna os itens dentro do firebase
-       if(data.mimetype){
-        this.listFilesEl.appendChild(this.getFileView(data, key));
+       if(data.mimetype){ //só renderiza caso haja um type
+        this.listFilesEl.appendChild(this.getFileView(data, key)); 
       }
       })
 
@@ -508,7 +508,42 @@ return li;
       this.firebaseRef(this.lastFolder).off('value') //recebe o valor da ultima pasta acesada
     } 
     //e para de "ouvir" os eventos dela
+    this.renderNav(); //barra de naveação
     this.ReadFile();
+
+  }
+
+  renderNav(){
+
+    let nav = document.createElement('nav') //cria a barra de navegação
+
+    for (let i  = 0; i   < this.current.length; i++) { //faz um for no currentFOlder
+      
+      let folderName = this.current[i];//pega o diretório atual do current
+      let span = document.createElement('span'); //cria um span
+      
+      if((i+1) === this.current.length){ //verifica se está no ultimo ponto do array pois o texto é diferentes
+
+      }else {
+        span.innerHTML = //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
+        nav.appendChild(span)
+      }
+    } 
+
+    /*
+     <span>
+                                    <h1 class="ax-visually-hidden">Meus Arquivos</h1>
+                                    <nav class="page-header-text u-l-fl" id="browse-location" aria-label="Hierarquia de pastas" role="navigation">
+                                        <span class="breadcrumb-segment__wrapper">
+                                            <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
+                                                <a href="https://www.dropbox.com/work" class="breadcrumb-segment">HCODE</a>
+                                            </span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
+                                                <title>arrow-right</title>
+                                                <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282"
+                                                    fill-rule="evenodd"></path>
+                                            </svg>
+    */
 
   }
   InitEventsLi(li){
