@@ -1,74 +1,62 @@
-
-
 class DropBoxController {
   constructor() {
     this.navEl = document.querySelector("#browse-location"); //barra de naveação
-    this.current = ['hcode']; //definindo uma referência inicial(root)
-    this.onSelectionEvent = new Event('selectonchange');
+    this.current = ["hcode"]; //definindo uma referência inicial(root)
+    this.onSelectionEvent = new Event("selectonchange");
     this.inputFilesEl = document.querySelector("#files"); //seletor de arquivos
     this.btnSendFileEl = document.querySelector("#btn-send-file"); //botao de enviar arquivos
     this.snackModalEl = document.querySelector("#react-snackbar-root"); //barra de progresso
     this.progressBarEl = document.querySelector(".mc-progress-bar-fg"); //elemento da barra
     this.nameFileEl = document.querySelector(".filename"); //classe com o nome do arquivo
     this.timeLeftEl = document.querySelector(".timeleft"); //classe do tempo
-    this.listFilesEl = document.querySelector('#list-of-files-and-directories')  //diretorios
+    this.listFilesEl = document.querySelector("#list-of-files-and-directories"); //diretorios
 
-    this.btnNewFolder = document.querySelector('#btn-new-folder');
-    this.btnRename = document.querySelector('#btn-rename');
-    this.btnDelete = document.querySelector('#btn-delete');
+    this.btnNewFolder = document.querySelector("#btn-new-folder");
+    this.btnRename = document.querySelector("#btn-rename");
+    this.btnDelete = document.querySelector("#btn-delete");
 
-    
-    
-  //  this.StartFirebase();
-   
+    //  this.StartFirebase();
+
     this.InitEvents();
     this.connectFirebase();
     this.openFolder();
-    
   }
-  connectFirebase(){ //chave do firebase
+  connectFirebase() {
+    //chave do firebase
     const firebaseConfig = {
       apiKey: "AIzaSyB8ITSQgukDlphlhB2RZTyPF1nGky8v0MQ",
       authDomain: "dropbox-clone-ea9d3.firebaseapp.com",
       projectId: "dropbox-clone-ea9d3",
       storageBucket: "dropbox-clone-ea9d3.appspot.com",
       messagingSenderId: "400285203672",
-      appId: "1:400285203672:web:a4dc0b0dff329f425a6bad"
+      appId: "1:400285203672:web:a4dc0b0dff329f425a6bad",
     };
-  
+
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-
-
-    
   }
-  getSelection(){
-    
-    return this.listFilesEl.querySelectorAll('.selected') //retorna o LI selecionado
-
+  getSelection() {
+    return this.listFilesEl.querySelectorAll(".selected"); //retorna o LI selecionado
   }
 
-  removeTask( ){
-    
-let promises = [];
+  removeTask() {
+    let promises = [];
 
     this.getSelection().forEach((li) => {
       let file = JSON.parse(li.dataset.file);
       let key = li.dataset.key;
 
-      let formData = new FormData()
+      let formData = new FormData();
 
-      formData.append('path', file.filepath);
-      formData.append('key', key);
+      formData.append("path", file.filepath);
+      formData.append("key", key);
 
-      promises.push(
-        
-        this.ajax('/file', 'DELETE', formData));
-        console.log(promises)
+      promises.push(this.ajax("/file", "DELETE", formData));
+      console.log(promises);
     });
-    
+
     return Promise.all(promises);
-/*
+    /*
 
     let promises = []; //array que vai receber a coleção de promises, ppis pode receber mais de um email
 
@@ -87,117 +75,112 @@ let promises = [];
 */
   }
 
-  
   InitEvents() {
-    
+    this.btnNewFolder.addEventListener("click", (e) => {
+      let name = prompt("Nome da pasta:");
 
-    this.btnNewFolder.addEventListener("click", e=>{
-      let name = prompt('Nome da pasta:')
-    
-      if(name){
-
-     
-
-          this.firebaseRef().push().set({
-           originalFilename: name,
-            mimetype : 'folder',
-            path: this.current.join('/')
-
-           
-               
-
+      if (name) {
+        this.firebaseRef()
+          .push()
+          .set({
+            originalFilename: name,
+            mimetype: "folder",
+            path: this.current.join("/"),
           });
-           
-          
       }
-
-    })
-    this.btnDelete.addEventListener("click", e=>{
-      console.log("teste1")
-        this.removeTask().then(responses=> { //método de remoção que recebe a promise
-          responses.forEach((response)=>{
-            console.log("teste2")
+    });
+    this.btnDelete.addEventListener("click", (e) => {
+      console.log("teste1");
+      this.removeTask()
+        .then((responses) => {
+          //método de remoção que recebe a promise
+          responses.forEach((response) => {
+            console.log("teste2");
             if (response.files.key) {
               this.firebaseRef().child(response.fields.key).remove();
             }
-          })
-        }).catch((err)=>{ //catch error pra retornar erro caso haja
+          });
+        })
+        .catch((err) => {
+          //catch error pra retornar erro caso haja
 
-          console.log(err)
+          console.log(err);
         });
-
     });
 
-    this.btnRename.addEventListener('click', e=>{ //add o evento no rename
-      let li = this.getSelection()[0];//serve pra pegar o index
-      console.log(li)
+    this.btnRename.addEventListener("click", (e) => {
+      //add o evento no rename
+      let li = this.getSelection()[0]; //serve pra pegar o index
+      console.log(li);
       let file = JSON.parse(li.dataset.file); //pega os valores do arquivo
-     let name = prompt("Renomear arquivo:", file.name);
+      let name = prompt("Renomear arquivo:", file.name);
 
-     if(name){
-       file.originalFilename = name //pega o nome do arquivo
-       this.firebaseRef().child(li.dataset.key).set(file) //seta no firebase o nome novo
-     }
-    })
-      this.listFilesEl.addEventListener('selectonchange', e=>{ 
-        console.log('selectonchange', this.getSelection().length)
-        
-        let lenghtSize = this.getSelection().length
+      if (name) {
+        file.originalFilename = name; //pega o nome do arquivo
+        this.firebaseRef().child(li.dataset.key).set(file); //seta no firebase o nome novo
+      }
+    });
+    this.listFilesEl.addEventListener("selectonchange", (e) => {
+      console.log("selectonchange", this.getSelection().length);
 
-       switch (lenghtSize) {
-         case 0:
-          this.btnDelete.style.display = 'none'; 
-          this.btnRename.style.display= "none";
-      break;
-          case 1: 
-          this.btnDelete.style.display = "block"; 
-          this.btnRename.style.display= "block";
-       
-         
-          
-           
-           break;
-       
-         default:
-          this.btnDelete.style.display = "block"; 
-          this.btnRename.style.display= "none";
-           break;
-       }
-         
-      })
-         
+      let lenghtSize = this.getSelection().length;
+
+      switch (lenghtSize) {
+        case 0:
+          this.btnDelete.style.display = "none";
+          this.btnRename.style.display = "none";
+          break;
+        case 1:
+          this.btnDelete.style.display = "block";
+          this.btnRename.style.display = "block";
+
+          break;
+
+        default:
+          this.btnDelete.style.display = "block";
+          this.btnRename.style.display = "none";
+          break;
+      }
+    });
 
     this.btnSendFileEl.addEventListener("click", (e) => {
       this.inputFilesEl.click();
     });
     this.inputFilesEl.addEventListener("change", (e) => {
       console.log(e.target.files);
-      this.uploadTask(e.target.files).then(responses => { //Inicia uma arrow function
-        responses.forEach(resp => { //dentro do array com os arquivos executa um foreach
-          console.log(resp.files['input-file']) //Aqui é pra retornar o arquivo selecionado
-          this.inputFilesEl
-          this.firebaseRef().push().set(resp.files['input-file']) //pega a rota do arquivo e da um push pra coleção do firebase
+      this.uploadTask(e.target.files).then((responses) => {
+        //Inicia uma arrow function
+        responses.forEach((resp) => {
+          //dentro do array com os arquivos executa um foreach
+          console.log(resp.files["input-file"]); //Aqui é pra retornar o arquivo selecionado
+          this.inputFilesEl;
+          this.firebaseRef().push().set(resp.files["input-file"]); //pega a rota do arquivo e da um push pra coleção do firebase
         });
-
-       
       }); //vai fazer upload de varios arquivos
       this.ModalShow();
       this.inputFilesEl.value = "";
     });
   }
-  firebaseRef(Filepath){
-   
-      if(!Filepath) {Filepath = this.current.join('/'); //método join une valores de array
+  firebaseRef(Filepath) {
+    if (!Filepath) {
+      Filepath = this.current.join("/"); //método join une valores de array
     }
-   return firebase.database().ref(Filepath) //o firebase pega os files como referencia(rotas)
+    return firebase.database().ref(Filepath); //o firebase pega os files como referencia(rotas)
   }
   ModalShow(show = true) {
     this.snackModalEl.style.display = show ? "block" : "none";
   }
 
-  ajax(url, method , formData = new FormData(), onprogress = function(){}, startUploadTime = function(){}){ //passando um método padrão
+  ajax(
+    url,
+    method,
+    formData = new FormData(),
+    onprogress = function () { },
+    startUploadTime = function () { }
+  ) {
+    //passando um método padrão
 
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
       let ajax = new XMLHttpRequest(); //aqui criamos um XML request que vai ser enviado como ajax(JOSn)
       ajax.open(method, url); //Abrimos a conexãop ajax e passamos a rota upload e o método post
       ajax.onload = (event) => {
@@ -216,30 +199,35 @@ let promises = [];
       };
 
       ajax.upload.onprogress = onprogress; //recebe o valor pelo parametro
-      
+
       startUploadTime(); //recebe o valor pelo parametro
       ajax.send(formData); //O form data salva o arquivo recebido  pelo ajax e envia
-
-    })
+    });
   }
 
   uploadTask(files) {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
       let formData = new FormData();
-      formData.append('input-file', files)
-      
+      formData.append("input-file", files);
+
       //pega o array vazio e da push nas promises
       promises.push(
-        
-        this.ajax('/upload', 'POST', formData, ()=>{
-          this.uploadProgress(event, files);
-        }, ()=>{
-             this.startUploadTime = Date.now();
-             console.log('teste',formData)
-        }));
-    }); 
-   
+        this.ajax(
+          "/upload",
+          "POST",
+          formData,
+          () => {
+            this.uploadProgress(event, files);
+          },
+          () => {
+            this.startUploadTime = Date.now();
+            console.log("teste", formData);
+          }
+        )
+      );
+    });
+
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
   }
   uploadProgress(event, files) {
@@ -279,7 +267,7 @@ let promises = [];
 
   getFileIconview(file) {
     switch (file.mimetype) {
-      case 'folder':
+      case "folder":
         return `
         <svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
             <title>content-folder-large</title>
@@ -289,8 +277,8 @@ let promises = [];
             </g>
         </svg>`;
 
-        case 'audio/mp3':
-            return `<svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
+      case "audio/mp3":
+        return `<svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
             <title>content-audio-large</title>
             <defs>
                 <rect id="mc-content-audio-large-b" x="30" y="43" width="100" height="74" rx="4"></rect>
@@ -306,9 +294,9 @@ let promises = [];
                 </g>
                 <path d="M67 60c0-1.657 1.347-3 3-3 1.657 0 3 1.352 3 3v40c0 1.657-1.347 3-3 3-1.657 0-3-1.352-3-3V60zM57 78c0-1.657 1.347-3 3-3 1.657 0 3 1.349 3 3v4c0 1.657-1.347 3-3 3-1.657 0-3-1.349-3-3v-4zm40 0c0-1.657 1.347-3 3-3 1.657 0 3 1.349 3 3v4c0 1.657-1.347 3-3 3-1.657 0-3-1.349-3-3v-4zm-20-5.006A3 3 0 0 1 80 70c1.657 0 3 1.343 3 2.994v14.012A3 3 0 0 1 80 90c-1.657 0-3-1.343-3-2.994V72.994zM87 68c0-1.657 1.347-3 3-3 1.657 0 3 1.347 3 3v24c0 1.657-1.347 3-3 3-1.657 0-3-1.347-3-3V68z" fill="#637282"></path>
             </g>
-        </svg>`
+        </svg>`;
 
-        case 'video/mp4': 
+      case "video/mp4":
         return `<svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
         <title>content-video-large</title>
         <defs>
@@ -325,14 +313,10 @@ let promises = [];
             </g>
             <path d="M69 67.991c0-1.1.808-1.587 1.794-1.094l24.412 12.206c.99.495.986 1.3 0 1.794L70.794 93.103c-.99.495-1.794-.003-1.794-1.094V67.99z" fill="#637282"></path>
         </g>
-    </svg>` 
+    </svg>`;
 
-            
-
-        
-
-        case 'application/pdf':
-               return  `<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="160px" height="160px" viewBox="0 0 160 160" enable-background="new 0 0 160 160" xml:space="preserve">
+      case "application/pdf":
+        return `<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="160px" height="160px" viewBox="0 0 160 160" enable-background="new 0 0 160 160" xml:space="preserve">
                 <filter height="102%" width="101.4%" id="mc-content-unknown-large-a" filterUnits="objectBoundingBox" y="-.5%" x="-.7%">
                     <feOffset result="shadowOffsetOuter1" in="SourceAlpha" dy="1"></feOffset>
                     <feColorMatrix values="0 0 0 0 0.858823529 0 0 0 0 0.870588235 0 0 0 0 0.88627451 0 0 0 1 0" in="shadowOffsetOuter1">
@@ -363,15 +347,14 @@ let promises = [];
                         M81.955,86.183c-0.912,0.01-2.209,0.098-1.733-1.421c0.264-0.841,0.955-2.04,1.622-2.162c1.411-0.259,1.409,1.421,2.049,2.186
                         C84.057,86.456,82.837,86.174,81.955,86.183z M96.229,94.8c-1.14-0.082-1.692-1.111-1.785-2.033
                         c-0.131-1.296,1.072-0.867,1.753-0.876c0.796-0.011,1.668,0.118,1.588,1.293C97.394,93.857,97.226,94.871,96.229,94.8z"></path>
-            </svg>`
-        
-      
+            </svg>`;
+
       case "image/jpeg":
-      case 'image/png':
-      case 'image/jpg':
-      case 'image/gif':
-      case 'image/webp':
-      return `
+      case "image/png":
+      case "image/jpg":
+      case "image/gif":
+      case "image/webp":
+        return `
             <svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="160px" height="160px" viewBox="0 0 160 160" enable-background="new 0 0 160 160" xml:space="preserve">
             <filter height="102%" width="101.4%" id="mc-content-unknown-large-a" filterUnits="objectBoundingBox" y="-.5%" x="-.7%">
                 <feOffset result="shadowOffsetOuter1" in="SourceAlpha" dy="1"></feOffset>
@@ -411,7 +394,7 @@ let promises = [];
             </g>
         </svg> `;
 
-        default:
+      default:
         return `<svg width="160" height="160" viewBox="0 0 160 160" class="mc-icon-template-content tile__preview tile__preview--icon">
         <title>1357054_617b.jpg</title>
         <defs>
@@ -428,15 +411,12 @@ let promises = [];
             </g>
         </g>
     </svg>`;
-      
     }
   }
-  
-
 
   getFileView(file, key) {
-    var fileType = file.mimetype
-   /* switch (fileType) {
+    var fileType = file.mimetype;
+    /* switch (fileType) {
       
       case "image/jpeg":
         case 'image/png':
@@ -466,69 +446,75 @@ let promises = [];
 
 
     } */
-    let li = document.createElement('li');
-   
-    
+    let li = document.createElement("li");
+
     li.dataset.key = key; //key dos dados
     li.dataset.file = JSON.stringify(file); //peg ao obj file e converte pra texto e passa la pra cima
-   
-    
-  
-    li.innerHTML =  ` ${this.getFileIconview(file)} 
-   <div class = "name text-center" > ${file.originalFilename } </div> 
+
+    li.innerHTML = ` ${this.getFileIconview(file)} 
+   <div class = "name text-center" > ${file.originalFilename} </div> 
    
 `;
-this.InitEventsLi(li)  
+    this.InitEventsLi(li);
 
-return li;
+    return li;
   }
 
-  ReadFile(){
-
-    this.lastFolder = this.current.join('/'); //armazena todas as pastas sempre
-    this.firebaseRef().on('value', snapshot =>{ //esse snap é a coleção dos files, cada item gera uma key e as informações
-      this.listFilesEl.innerHTML = '';
-      snapshot.forEach(snapshotItem => {
-
+  ReadFile() {
+    this.lastFolder = this.current.join("/"); //armazena todas as pastas sempre
+    this.firebaseRef().on("value", (snapshot) => {
+      //esse snap é a coleção dos files, cada item gera uma key e as informações
+      this.listFilesEl.innerHTML = "";
+      snapshot.forEach((snapshotItem) => {
         //vai adicionar novos itens na view pois
         let key = snapshotItem.key; //a key unica do item
         let data = snapshotItem.val(); //os dados do item
-        
-      //  console.log(key, data) //retorna os itens dentro do firebase
-       if(data.mimetype){ //só renderiza caso haja um type
-        this.listFilesEl.appendChild(this.getFileView(data, key)); 
-      }
-      })
 
-    })
+        //  console.log(key, data) //retorna os itens dentro do firebase
+        if (data.mimetype) {
+          //só renderiza caso haja um type
+          this.listFilesEl.appendChild(this.getFileView(data, key));
+        }
+      });
+    });
   }
-  openFolder(){
-
-    if(this.lastFolder) {
-      this.firebaseRef(this.lastFolder).off('value') //recebe o valor da ultima pasta acesada
-    } 
+  openFolder() {
+    if (this.lastFolder) {
+      this.firebaseRef(this.lastFolder).off("value"); //recebe o valor da ultima pasta acesada
+    }
     //e para de "ouvir" os eventos dela
     this.renderNav(); //barra de naveação
     this.ReadFile();
-
   }
 
-  renderNav(){
+  renderNav() {
+    let nav = document.createElement("nav"); //cria a barra de navegação
 
-    let nav = document.createElement('nav') //cria a barra de navegação
+    for (let i = 0; i < this.current.length; i++) {
+      //faz um for no currentFOlder
 
-    for (let i  = 0; i   < this.current.length; i++) { //faz um for no currentFOlder
-      
-      let folderName = this.current[i];//pega o diretório atual do current
-      let span = document.createElement('span'); //cria um span
-      
-      if((i+1) === this.current.length){ //verifica se está no ultimo ponto do array pois o texto é diferentes
+      let folderName = this.current[i]; //pega o diretório atual do current
+      let span = document.createElement("span"); //cria um span
 
-      }else {
-        span.innerHTML = //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
-        nav.appendChild(span)
+      if (i + 1 === this.current.length) {
+        //verifica se está no ultimo ponto do array pois o texto é diferentes
+      } else {
+        span.className = "breadcrumb-segment__wrapper"; // nome da classe do span
+        span.innerHTML =
+          //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
+          `
+       <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
+                                                <a href="https://www.dropbox.com/work" class="breadcrumb-segment">HCODE</a>
+                                            </span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
+                                                <title>arrow-right</title>
+                                                <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282"
+                                                    fill-rule="evenodd"></path>
+                                            </svg>
+       `;
+        nav.appendChild(span);
       }
-    } 
+    }
 
     /*
      <span>
@@ -544,76 +530,61 @@ return li;
                                                     fill-rule="evenodd"></path>
                                             </svg>
     */
-
   }
-  InitEventsLi(li){
-    li.addEventListener('dblclick', e=>{
-        let file = JSON.parse(li.dataset.file);
-        switch (file.mimetype) {
-          case 'folder':
-            this.current.push(file.originalFilename)
-            this.openFolder();
-            console.log('click')
-            break;
-        
-          default:
-            window.open('/file?filepath' + file.filepath)
-            console.log('ye')
-          
-        }
+  InitEventsLi(li) {
+    li.addEventListener("dblclick", (e) => {
+      let file = JSON.parse(li.dataset.file);
+      switch (file.mimetype) {
+        case "folder":
+          this.current.push(file.originalFilename);
+          this.openFolder();
+          console.log("click");
+          break;
 
-    })
-    li.addEventListener('click', e =>{
-      
- 
-    
-      if(e.shiftKey){
-        let firstLi = this.listFilesEl.querySelector('.selected');
-        
-        if(firstLi){
+        default:
+          window.open("/file?filepath" + file.filepath);
+          console.log("ye");
+      }
+    });
+    li.addEventListener("click", (e) => {
+      if (e.shiftKey) {
+        let firstLi = this.listFilesEl.querySelector(".selected");
 
+        if (firstLi) {
           let indexStart; //Index que começa a "corrente"
           let indexEnd; //pega o final do array
-          let lis =  li.parentElement.childNodes
-         
-            lis.forEach((el, index)=>{ //entra dentro da ul e verifica cada li
+          let lis = li.parentElement.childNodes;
 
-            if(firstLi === el) indexStart = index//isso serve pra localizar o primeiro index do array que vai ser percorrido
-            if(li === el) indexEnd = index //pega o valor do ultimo index
-            
+          lis.forEach((el, index) => {
+            //entra dentro da ul e verifica cada li
 
+            if (firstLi === el) indexStart = index; //isso serve pra localizar o primeiro index do array que vai ser percorrido
+            if (li === el) indexEnd = index; //pega o valor do ultimo index
           });
 
-          let index  = [indexEnd, indexStart].sort();
-          lis.forEach((el, i)=>{
-            if(i>=index[0] && i<=index[1]){ //pega os valores entre esses 2 indexes e adiciona o eleento
-              el.classList.add('selected')
+          let index = [indexEnd, indexStart].sort();
+          lis.forEach((el, i) => {
+            if (i >= index[0] && i <= index[1]) {
+              //pega os valores entre esses 2 indexes e adiciona o eleento
+              el.classList.add("selected");
             }
-          })
-          console.log(index)
+          });
+          console.log(index);
         }
-
       }
-      if(!e.ctrlKey){ //detecta se o control não ta pressionado
+      if (!e.ctrlKey) {
+        //detecta se o control não ta pressionado
 
-        this.listFilesEl.querySelectorAll('li.selected').forEach(el=>{ //da um query slect na class
+        this.listFilesEl.querySelectorAll("li.selected").forEach((el) => {
+          //da um query slect na class
           //executa um for each que percorre a lista e remove cada selecionado haja outro clique
-          el.classList.remove('selected')//remove o selecionado
-          
-        })
-
-        
+          el.classList.remove("selected"); //remove o selecionado
+        });
       }
-   
-     
 
-     
-      li.classList.toggle('selected') //a classe selected
-     
-      this.listFilesEl.dispatchEvent( this.onSelectionEvent)
-    })
+      li.classList.toggle("selected"); //a classe selected
 
+      this.listFilesEl.dispatchEvent(this.onSelectionEvent);
+    });
   }
-  
 }
-
