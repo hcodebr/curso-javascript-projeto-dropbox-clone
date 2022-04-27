@@ -43,6 +43,10 @@ router.delete('/file', (req, res)=>{
     })
 
 });
+
+router.get('/file', (req, res)=>{
+  let path = req.query.path;
+})
 router.post('/upload', (req, res) =>{ //criando a rota upload
   let form = new formidable.IncomingForm({ //envia o formulario com o diretorio da pasta upload que esta na raiz
     uploadDir: './upload', //envia o diretório 
