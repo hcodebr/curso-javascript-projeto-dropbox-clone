@@ -489,14 +489,15 @@ class DropBoxController {
 
   renderNav() {
     let nav = document.createElement("nav"); //cria a barra de navegação
-
+    let path = []; //grava o caminho das pastas
     for (let i = 0; i < this.current.length; i++) {
       //faz um for no currentFOlder
 
       let folderName = this.current[i]; //pega o diretório atual do current
       let span = document.createElement("span"); //cria um span
-
+      path.push(folderName);
       if (i + 1 === this.current.length) {
+        span.innerHTML = folderName
         //verifica se está no ultimo ponto do array pois o texto é diferentes
       } else {
         span.className = "breadcrumb-segment__wrapper"; // nome da classe do span
@@ -504,12 +505,12 @@ class DropBoxController {
           //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
           `
        <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
-                                                <a href="https://www.dropbox.com/work" class="breadcrumb-segment">HCODE</a>
-                                            </span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
-                                                <title>arrow-right</title>
-                                                <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282"
-                                                    fill-rule="evenodd"></path>
+      <a href="" class="breadcrumb-segment">${folderName}</a>
+             </span>
+        <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
+                 <title>arrow-right</title>
+                   <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282"
+                               fill-rule="evenodd"></path>
                                             </svg>
        `;
         nav.appendChild(span);
