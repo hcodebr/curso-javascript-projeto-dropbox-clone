@@ -495,9 +495,9 @@ return li;
         let data = snapshotItem.val(); //os dados do item
         
       //  console.log(key, data) //retorna os itens dentro do firebase
-
+       if(data.mimetype){
         this.listFilesEl.appendChild(this.getFileView(data, key));
-        
+      }
       })
 
     })
