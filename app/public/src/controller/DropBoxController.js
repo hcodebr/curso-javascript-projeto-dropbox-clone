@@ -501,19 +501,16 @@ class DropBoxController {
         //verifica se está no ultimo ponto do array pois o texto é diferentes
       } else {
         span.className = "breadcrumb-segment__wrapper"; // nome da classe do span
-        span.innerHTML =
-          //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
-          `
-       <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
-      <a href="#" data-path="${path.join('/')}" class="breadcrumb-segment">${folderName}</a>
-             </span>
+         //caso não seja o ultimo ele vai pegar o span e jogar dentro do HTML com os nomes etc
+        span.innerHTML =  `
+        <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
+          <a href="#" data-path="${path.join('/')}" class="breadcrumb-segment">${folderName}</a>
+        </span>
         <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
-                 <title>arrow-right</title>
-                   <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282"
-                               fill-rule="evenodd"></path>
-                                            </svg>
-       `;
-        
+          <title>arrow-right</title>
+          <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282" fill-rule="evenodd"></path>
+        </svg>
+      `
       }
       nav.appendChild(span);
     }
@@ -541,7 +538,7 @@ class DropBoxController {
           break;
 
         default:
-          window.open("/file?filepath" + file.filepath);
+          window.open("/file?filepath=" + file.filepath);
           console.log("ye");
       }
     });
