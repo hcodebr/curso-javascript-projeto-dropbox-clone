@@ -208,24 +208,7 @@ class DropBoxController {
   uploadTask(files) {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
-      let formData = new FormData();
-      formData.append("input-file", files);
-
-      //pega o array vazio e da push nas promises
-      promises.push(
-        this.ajax(
-          "/upload",
-          "POST",
-          formData,
-          () => {
-            this.uploadProgress(event, files);
-          },
-          () => {
-            this.startUploadTime = Date.now();
-            console.log("teste", formData);
-          }
-        )
-      );
+     let fireRef = firebase.storage().ref(this.current).join('/').child(files.name);  //Um let que armazena a rererencia do arquivo
     });
 
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
