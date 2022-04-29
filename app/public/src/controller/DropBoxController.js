@@ -211,6 +211,7 @@ class DropBoxController {
      let fireRef = firebase.storage().ref(this.current).join('/').child(files.name);  //Um let que armazena a rererencia do arquivo
      let task = fireRef(); //Criamos um let task para poder manipular os dados recebidos do fireRef 
 
+     task.on('state_change', ()=>{} , error, resolve)
     });
 
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
