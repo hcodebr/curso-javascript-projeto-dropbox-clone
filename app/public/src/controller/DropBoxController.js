@@ -1,5 +1,6 @@
 class DropBoxController {
   constructor() {
+
     this.navEl = document.querySelector("#browse-location"); //barra de naveação
     this.current = ["hcode"]; //definindo uma referência inicial(root)
     this.onSelectionEvent = new Event("selectonchange");
@@ -208,21 +209,24 @@ class DropBoxController {
   uploadTask(files) {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
-     let fireRef = firebase.storage().ref(this.current).join('/').child(files.name);  //Um let que armazena a rererencia do arquivo
-     let task = fireRef(); //Criamos um let task para poder manipular os dados recebidos do fireRef 
-
-     task.on('state_change',snapshot=>{//snapthos vizualisa o estado atual do arquivo, como os bytes e etc
-
-      console.log('progress', snapshot);
-
-     }, error=>{
-
-      
-     }, resolve=>{
-
-
-     });
-     promises.push();
+     
+     promises.push(new Promise((resolve, reject)=>{
+      let fireRef = firebase.storage().ref(this.current.join('/')).child(files.name);  //Um let que armazena a rererencia do arquivo
+      let task = fireRef.put(files); //Criamos um let task para poder manipular os dados recebidos do fireRef 
+ 
+      task.on('state_change', snapshot=>{//snapthos vizualisa o estado atual do arquivo, como os bytes e etc
+ 
+       console.log('progress', snapshot);
+ 
+      }, error=>{
+ 
+       console.error(error)
+       reject('fudeu', error)
+      }, snapshot=>{
+       console.log('sus', snapshot)
+        resolve();
+      });
+     }));
     });
 
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
