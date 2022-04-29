@@ -209,6 +209,8 @@ class DropBoxController {
     let promises = []; //usamos uma promise pois cada arquivo pode ocorrer o upload ou falhar
     [...files].forEach((files) => {
      let fireRef = firebase.storage().ref(this.current).join('/').child(files.name);  //Um let que armazena a rererencia do arquivo
+     let task = fireRef(); //Criamos um let task para poder manipular os dados recebidos do fireRef 
+
     });
 
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
