@@ -150,13 +150,8 @@ class DropBoxController {
     this.inputFilesEl.addEventListener("change", (e) => {
       console.log(e.target.files);
       this.uploadTask(e.target.files).then((responses) => {
-        //Inicia uma arrow function
-        responses.forEach((resp) => {
-          //dentro do array com os arquivos executa um foreach
-          console.log(resp.files["input-file"]); //Aqui é pra retornar o arquivo selecionado
-          this.inputFilesEl;
-          this.firebaseRef().push().set(resp.files["input-file"]); //pega a rota do arquivo e da um push pra coleção do firebase
-        });
+         
+        console.log('responses', responses);
       }); //vai fazer upload de varios arquivos
       this.ModalShow();
       this.inputFilesEl.value = "";
@@ -219,18 +214,28 @@ class DropBoxController {
           loaded: snapshot.bytesTransferred,
           total: snapshot.totalBytes
         }, files)
-       console.log('progress', snapshot);
+      
  
       }, error=>{
  
        console.error(error)
        reject('fudeu', error)
-      }, snapshot=>{
-       console.log('sus', snapshot)
-        resolve();
-      });
-     }));
+      }, ()=>{
+        fireRef.getMetadata().then(metadata=>{
+          resolve(metadata);
+          
+        }).catch(err=>{
+          reject(err)
+
+        console.log(err)
+        
+      })
+  
     });
+  
+  }));
+  
+});
 
     return Promise.all(promises); //redebe todas as promises e faz o controle doque deu resolve ou reject
   }
