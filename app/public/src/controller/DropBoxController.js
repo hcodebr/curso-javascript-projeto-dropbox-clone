@@ -57,6 +57,8 @@ class DropBoxController {
     });
 
     return Promise.all(promises);
+
+
     /*
 
     let promises = []; //array que vai receber a coleção de promises, ppis pode receber mais de um email
@@ -76,6 +78,20 @@ class DropBoxController {
 */
   }
 
+  removeFile(){
+    let fileRef = firebase.storage.ref(this.current.join('/')).child(file.name)
+
+    fileRef.remove().then(()=>{
+
+      resolve({
+        fields:{
+          key
+        }
+      })
+    }).catch(err=>{
+      reject(err)
+    })
+  }
   InitEvents() {
     this.btnNewFolder.addEventListener("click", (e) => {
       let name = prompt("Nome da pasta:");
@@ -172,9 +188,10 @@ class DropBoxController {
          //vai fazer upload de varios arquivos
         console.log(responses)
       */
+
       })
-      
       this.ModalShow();
+     
       this.inputFilesEl.value = "";
     });
   }
