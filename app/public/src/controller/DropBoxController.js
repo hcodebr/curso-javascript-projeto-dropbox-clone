@@ -151,7 +151,7 @@ class DropBoxController {
       console.log(e.target.files);
       this.uploadTask(e.target.files).then((responses) => {
          
-        console.log('responses', responses);
+        console.log('responses', responses); //retorna o resultado das promises
       }); //vai fazer upload de varios arquivos
       this.ModalShow();
       this.inputFilesEl.value = "";
@@ -221,10 +221,10 @@ class DropBoxController {
        console.error(error)
        reject('fudeu', error)
       }, ()=>{
-        fireRef.getMetadata().then(metadata=>{
-          resolve(metadata);
+        fireRef.getMetadata().then(metadata=>{ //firebase pega os metadados
+          resolve(metadata); //resolve e passsa o netadai
           
-        }).catch(err=>{
+        }).catch(err=>{ //reject caso de erro
           reject(err)
 
         console.log(err)
