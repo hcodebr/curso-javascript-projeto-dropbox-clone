@@ -150,9 +150,30 @@ class DropBoxController {
     this.inputFilesEl.addEventListener("change", (e) => {
       console.log(e.target.files);
       this.uploadTask(e.target.files).then((responses) => {
-         
-        console.log('responses', responses); //retorna o resultado das promises
-      }); //vai fazer upload de varios arquivos
+            responses.forEach(resp=>{
+              console.log(responses)
+              this.firebaseRef().push().set({
+                originalFilename: resp.name,
+                mimetype: resp.contentType,
+                filepath: resp.fullPath,
+                size: resp.size
+              });
+            })     
+        /*
+        responses.forEach(resp=>{
+  this.firebaseRef()
+        .push()
+        .set({ 
+        name: resp.name, 
+          type: resp.contentType
+     
+            });
+           });
+         //vai fazer upload de varios arquivos
+        console.log(responses)
+      */
+      })
+      
       this.ModalShow();
       this.inputFilesEl.value = "";
     });
