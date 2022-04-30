@@ -215,7 +215,10 @@ class DropBoxController {
       let task = fireRef.put(files); //Criamos um let task para poder manipular os dados recebidos do fireRef 
  
       task.on('state_change', snapshot=>{//snapthos vizualisa o estado atual do arquivo, como os bytes e etc
- 
+        this.uploadProgress({
+          loaded: snapshot.bytesTransferred,
+          total: snapshot.totalBytes
+        }, files)
        console.log('progress', snapshot);
  
       }, error=>{
