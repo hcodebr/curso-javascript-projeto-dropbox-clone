@@ -53,13 +53,17 @@ class DropBoxController {
       formData.append("key", key);
 
       promises.push(new Promise((resolve, reject)=>{
-        this.current.join('/')
+        
         file.name;
-        resolve({
-          fields:{
-            key
-          }
-        })
+
+        this.removeFile(this.current.join('/'),  file.name).then(()=>{
+          resolve({
+            fields:{
+              key
+            }
+          });
+        });
+       
       }));
       console.log(promises);
     });
@@ -89,12 +93,7 @@ class DropBoxController {
   removeFile(){
     let fileRef = firebase.storage.ref(this.current.join('/')).child(file.name)
 
-    fileRef.remove().then(()=>{
-
-  
-    }).catch(err=>{
-      reject(err)
-    })
+    return fileRef.remove()
   }
   InitEvents() {
     this.btnNewFolder.addEventListener("click", (e) => {
