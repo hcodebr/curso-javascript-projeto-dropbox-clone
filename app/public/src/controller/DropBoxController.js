@@ -52,7 +52,15 @@ class DropBoxController {
       formData.append("path", file.filepath);
       formData.append("key", key);
 
-      promises.push(this.ajax("/file", "DELETE", formData));
+      promises.push(new Promise((resolve, reject)=>{
+        this.current.join('/')
+        file.name;
+        resolve({
+          fields:{
+            key
+          }
+        })
+      }));
       console.log(promises);
     });
 
@@ -83,11 +91,7 @@ class DropBoxController {
 
     fileRef.remove().then(()=>{
 
-      resolve({
-        fields:{
-          key
-        }
-      })
+  
     }).catch(err=>{
       reject(err)
     })
