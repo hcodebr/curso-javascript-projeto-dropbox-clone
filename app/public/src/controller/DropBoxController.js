@@ -40,6 +40,31 @@ class DropBoxController {
     return this.listFilesEl.querySelectorAll(".selected"); //retorna o LI selecionado
   }
 
+  removeFolderTask(ref, name){
+    
+    return new Promise((resolve, reject)=>{
+    
+      let folderRef = this.firebaseRef(ref + '/' + name)
+
+      folderRef.on('value', snapshot =>{
+        snapshot.forEach(item=>{
+
+          let data = item.val();
+          data.key = item.key;
+
+
+          if(data.type === 'folder'){
+
+          }else if(data.type){
+
+            
+          }
+        })
+      })
+    })
+
+  }
+
   removeTask() {
     let promises = [];
 
