@@ -54,10 +54,21 @@ class DropBoxController {
 
 
           if(data.type === 'folder'){
+            this.removeFolderTask(ref + '/' + data.name).then((resolve, reject)=>{
 
+              resolve({
+                fields:{
+                    key: data.key
+
+                } 
+
+              }).catch(err=>{
+                reject(err)
+              })
+            })
           }else if(data.type){
+            this.removeFile(ref + '/' + data.name)
 
-            
           }
         })
       })
@@ -126,7 +137,7 @@ class DropBoxController {
 */
   }
 
-  removeFile(){
+  removeFile(ref, name){
     let fileRef = firebase.storage.ref(this.current.join('/')).child(file.name)
 
     return fileRef.remove()
