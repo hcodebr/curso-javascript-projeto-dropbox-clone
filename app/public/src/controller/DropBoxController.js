@@ -47,22 +47,33 @@ class DropBoxController {
       let file = JSON.parse(li.dataset.file);
       let key = li.dataset.key;
 
-      let formData = new FormData();
+//      let formData = new FormData();
 
       formData.append("path", file.filepath);
       formData.append("key", key);
 
       promises.push(new Promise((resolve, reject)=>{
-        
-        file.name;
-
-        this.removeFile(this.current.join('/'),  file.name).then(()=>{
-          resolve({
-            fields:{
-              key
-            }
+        if(file.mimetype === 'folder'){
+          this.removeFolderTask(this.current.join('/'),  file.name).then(()=>{
+            resolve({
+              fields:{
+                key
+              }
+            });
           });
-        });
+
+        }else if(file.mimetype){
+          this.removeFile(this.current.join('/'),  file.name).then(()=>{
+            resolve({
+              fields:{
+                key
+              }
+            });
+          });
+        }
+      //  file.name;
+
+      
        
       }));
       console.log(promises);
