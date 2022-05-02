@@ -67,10 +67,23 @@ class DropBoxController {
               })
             })
           }else if(data.type){
-            this.removeFile(ref + '/' + data.name)
+            this.removeFile(ref + '/' + data.name).then((resolve, reject)=>{
+
+              resolve({
+                fields:{
+                    key: data.key
+
+                } 
+
+              }).catch(err=>{
+                reject(err)
+              })
+            })
 
           }
         })
+        folderRef.remove();
+        folderRef.off('value')
       })
     })
 
