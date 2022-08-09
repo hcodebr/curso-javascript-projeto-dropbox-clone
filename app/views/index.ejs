@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Hcode Treinamentos">
+
+    <title>DropBox Clone</title>
+<!--teste--> !>
+    <link href="bower_components/Ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/dropbox-clone.css" rel="stylesheet">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+
+                <div id="logo-dropbox">
+                    <a class="maestro-nav__home-button" href="#" >
+                        <svg class="maestro-nav__logo" aria-label="Início" xmlns="http://www.w3.org/2000/svg" role="img" width="32px" height="32px"
+                            viewBox="0 0 32 32" style="fill:#0062ff;">
+                            <title></title>
+                            <path d="M8 2.4l8 5.1-8 5.1-8-5.1 8-5.1zm16 0l8 5.1-8 5.1-8-5.1 8-5.1zM0 17.7l8-5.1 8 5.1-8 5.1-8-5.1zm24-5.1l8 5.1-8 5.1-8-5.1 8-5.1zM8 24.5l8-5.1 8 5.1-8 5.1-8-5.1z"
+                                data-reactid="14"></path>
+                        </svg>
+                        <svg class="maestro-nav__caret" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" data-reactid="15">
+                            <title data-reactid="16">Left Arrow</title>
+                            <g id="arrow" transform="translate(-32.000000, -32.000000)" data-reactid="17">
+                                <g id="arrow-left" transform="translate(32.000000, 32.000000)" data-reactid="18">
+                                    <polygon id="Combined-Shape" points="12.9497475 7.05000305 8 11.9997505 12.9497475 16.949498 14.363961 15.5352844 10.8284271 11.9997505 14.363961 8.46421661"
+                                        data-reactid="19"></polygon>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="sidebar-sticky">
+                    <div class="maestro-nav__contents">
+                        <ul class="maestro-nav__features" data-reactid="21">
+                            <li data-reactid="22">
+                                <h2 class="maestro-nav__features-header" data-reactid="23">
+                                    <a href="#" class="maestro-nav__features-header-link" data-reactid="24">Arquivos</a>
+                                </h2>
+                            </li>
+                            <li data-reactid="25">
+                                <div class="maestro-nav__feature-wrap" data-reactid="26">
+                                    <span class="ue-effect-container uee-FeatureNav-myFiles" data-reactid="27">
+                                        <a href="#" class="maestro-nav__feature maestro-nav__active-feature" data-reactid="28">
+                                        Meus arquivos
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li data-reactid="30">
+                                <div class="maestro-nav__feature-wrap" data-reactid="31">
+                                    <span class="ue-effect-container uee-FeatureNav-sharing" data-reactid="32">
+                                        <a href="#" class="maestro-nav__feature" data-reactid="33">
+                                            Compartilhamento
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li data-reactid="35">
+                                <div class="maestro-nav__feature-wrap" data-reactid="36">
+                                    <span class="ue-effect-container uee-FeatureNav-fileRequests" data-reactid="37">
+                                        <a href="#" class="maestro-nav__feature" data-reactid="38">
+                                            Solicitações de arquivo
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li data-reactid="40">
+                                <div class="maestro-nav__feature-wrap" data-reactid="41">
+                                    <span class="ue-effect-container uee-FeatureNav-deletedFiles" data-reactid="42">
+                                        <a href="#" class="maestro-nav__feature" data-reactid="43">
+                                            Arquivos excluídos
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="maestro-nav-footer" data-reactid="45">
+                    <div class="ue-effect-container uee-FooterNav-NavSwitcher" data-reactid="46">
+                        <div class="maestro-nav-switcher" data-reactid="47">
+                            <span role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" class="maestro-nav-switcher-button" data-reactid="48">
+                                <div class="maestro-nav-switcher-button__content" data-reactid="49">
+                                    <div class="maestro-nav-switcher-button__info" data-reactid="50">
+                                        <div class="maestro-nav-switcher-button__title" data-reactid="51">HCODE</div>
+                                        <div class="maestro-nav-switcher-button__label" data-reactid="52">3 membros</div>
+                                    </div>
+                                    <svg class="maestro-nav-switcher-button__icon" viewBox="0 0 24 24" data-reactid="53">
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" data-reactid="54">
+                                            <g id="form" transform="translate(-160.000000, -32.000000)" fill="#000000" data-reactid="55">
+                                                <g id="form-switcher" transform="translate(160.000000, 32.000000)" data-reactid="56">
+                                                    <path d="M10.5,9 L8.26000214,9 L12.0100021,4 L15.7600021,9 L13.5,9 L12,7 L10.5,9 Z" id="Combined-Shape"
+                                                        data-reactid="57"></path>
+                                                    <path d="M10.5,20 L8.26000214,20 L12.0100021,15 L15.7600021,20 L13.5,20 L12,18 L10.5,20 Z"
+                                                        id="Combined-Shape" transform="translate(12.010002, 17.500000) scale(1, -1) translate(-12.010002, -17.500000) "
+                                                        data-reactid="58"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                
+                <header class="maestro-header page-header__shadow">
+                    <div class="page-header">
+                        <div class="page-header__title page-header__title-overflow" tabindex="0">
+                            <span class="ue-effect-container uee-PageletMaestroHeader-Title">
+                                <span>
+                                    <h1 class="ax-visually-hidden">Meus Arquivos</h1>
+                                    <nav class="page-header-text u-l-fl" id="browse-location" aria-label="Hierarquia de pastas" role="navigation">
+                                        <span class="breadcrumb-segment__wrapper">
+                                            <span class="ue-effect-container uee-BreadCrumbSegment-link-0">
+                                                <a href="https://www.dropbox.com/work" class="breadcrumb-segment">HCODE</a>
+                                            </span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-stateless" style="top: 4px; position: relative;">
+                                                <title>arrow-right</title>
+                                                <path d="M10.414 7.05l4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z" fill="#637282"
+                                                    fill-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <span>Avell</span>
+                                    </nav>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="top-menu-container ">
+                            <div class="search-bar--container u-l-fr">
+                                <div class="is-collapsed search-bar">
+                                    <form class="search-bar__input">
+                                        <button aria-label="Buscar" class="search-bar__button" type="submit">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mc-icon-template-selectable">
+                                                <title>Artboard</title>
+                                                <defs>
+                                                    <circle id="mc-global-search-small-a" cx="5" cy="5" r="5"></circle>
+                                                </defs>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <path d="M15 15l3 3" stroke="#637282" stroke-width="2" stroke-linecap="round"></path>
+                                                    <g transform="translate(7 7)">
+                                                        <mask id="mc-global-search-small-b" fill="#fff">
+                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mc-global-search-small-a"></use>
+                                                        </mask>
+                                                        <circle stroke="#637282" stroke-width="4" mask="url(#mc-global-search-small-b)" cx="5"
+                                                            cy="5" r="5"></circle>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <input aria-activedescendant="search-dropdown-suggestion0" aria-autocomplete="list" aria-expanded="false"
+                                            aria-label="Buscar" aria-owns="search-bar__suggestions" class="search-bar__text-input" placeholder="Buscar"
+                                            role="combobox" value="" tabindex="1">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="top-menu-container--search-bar-empty-space"></div>
+                        </div>
+                    </div>
+                </header>
+
+                <section id="content-section">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <ul class="list-unstyled" id="list-of-files-and-directories"></ul>
+                        <!--Icones removidos-->
+                        
+                        </div>
+                        <div class="col-md-3">
+                            <button id="btn-send-file" type="button" class="btn btn-primary btn-block btn-sm">Enviar arquivos</button>
+                            <input type="file" id="files" style="display:none;" multiple>
+                            <button id="btn-new-folder" type="button" class="btn btn-link btn-block btn-sm btn-icon"><i class="ion-android-folder-open"></i>Nova Pasta</button>
+                            <button style="display: none;" id="btn-rename" type="button" class="btn btn-link btn-block btn-sm btn-icon"><i class="ion-edit"></i>Renomear</button>
+                            <button style="display: none;" id="btn-delete" type="button" class="btn btn-link btn-block btn-sm btn-icon"><i class="ion-trash-a"></i>Excluir</button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="react-snackbar-root" style="display:none">
+        <div data-reactroot="" class="mc-snackbar-holder-backdrop">
+            <div class="mc-snackbar">
+                <div class="mc-snackbar-container mc-snackbar-container--snackbar-icon">
+                    <div class="mc-snackbar-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" class="mc-icon-template-status mc-icon-template-status-rotating">
+                            <title>Status: Syncing</title>
+                            <path d="M16 24a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-3a5 5 0 0 0 3.467-8.602l-.57.844A4 4 0 0 1 16 20l.001-1.5-2.5 2 2.5 2V21zm0-10a5 5 0 0 0-3.667 8.399l.578-.858A4 4 0 0 1 16 12v1.5l2.5-2-2.5-2V11z"
+                                fill="#0070E0" fill-rule="nonzero"></path>
+                        </svg>
+                    </div>
+                    <p class="mc-snackbar-title">Enviando o arquivo <span class="filename">file.pdf</span> - <span class="timeleft">8 min</span> restantes</p>
+                </div>
+                <div class="mc-progress-bar-bg">
+                    <div class="mc-progress-bar-fg" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <!-- Script do DB: -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+     
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+<script src="src/controller/DropBoxController.js"></script>
+
+<script src="src/index.js"></script>
+</body>
+
+</html>
